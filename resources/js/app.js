@@ -37,8 +37,7 @@ app.component('example-component', ExampleComponent);
  */
 
 import.meta.glob([
-  '../img/**',
-  '../fonts/**'
+  '../img/**'
 ]);
 
 
