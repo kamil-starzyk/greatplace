@@ -36,4 +36,9 @@ app.component('example-component', ExampleComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
+import.meta.glob([
+  '../img/**'
+]);
+
+
 app.mount('#app');
