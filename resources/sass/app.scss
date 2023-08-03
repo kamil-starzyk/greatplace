@@ -14,11 +14,15 @@ body {
   min-height: 100vh;
   font-family: Roboto;
 }
-.body-home{
-  background-image: url("/resources/img/home_bg.png");
+.leaves-background{
+  position:fixed;
+  top:0;
+  width: 100%;
+  height: 300px;
+  background-image: url("/resources/img/home_background.png");
   background-position: center;
   background-size: cover;
-  
+  z-index: -1;
 }
 
 header{
@@ -28,6 +32,10 @@ header{
   height: 60px;
   border-bottom: 1px solid #F1F1F1;
 }
+.dark-theme header{
+  border-bottom: none;
+} 
+
 #logo{
   height: 100%;
   width: 100%;
@@ -52,11 +60,12 @@ nav{
   text-decoration: none;
   flex-direction: column;
   align-items: center;
+  align-items: center;
   text-align: center;
 }
 .main-link span{
   display: block;
-  color: #B6B6B6;
+  color: $white2;
   font-size: 11px;
 }
 .main-link span.active{
@@ -67,7 +76,53 @@ nav{
   height: 300px;
 }
 
-#search-box{
-  height: 302px;
-  background-image: url('../assets/img/home_bg.png');
+.search-box{
+  height: 222px;
+  padding-top: 13px;
+}
+
+.dark-theme .slogan {
+  color: $white1;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 133%;
+  letter-spacing: -0.5px;
+  padding-bottom: 18px;
+}
+.slogan strong{
+  font-weight: 700;
+}
+
+.search-box form{
+  position: relative;
+}
+.search-box form .search-icon{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.search-box form .filters-icon{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.search-bar{
+  width: 100%;
+  height: 48px;
+  border-radius: 24px;
+  background: #FFF;
+  padding-left: 42px;
+}
+::placeholder{
+  color: $white2;
+}
+
+.content-box{
+  width: 100%;
+  min-height: 50vh;
+  background-color: $white1;
+  border-top: solid;
+  border-radius: 16px;
+  padding: 16px;
 }

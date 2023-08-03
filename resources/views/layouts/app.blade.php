@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ config('app.name', 'Laravel') }}</title>
-
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body class="{{ (\Request::route()->getName() == 'home') ? 'body-home':'' }}">
+<body class="{{ (Route::has('home') ? 'dark-theme':'' )}}">
   <header>
     <div id="logo">
-      <img src="{{ asset('img/logo.png') }}" alt="App Logo">
+      @if(Route::is('home') )
+        <img src="{{ asset('img/logo_dark_theme.png') }}" alt="Site name: Greatplace">
+      @else
+        <img src="{{ asset('img/logo.png') }}" alt="Site name: Greatplace">
+      @endif
     </div>
   </header>
-
-  <main class="py-4">
+</body>
+  <main>
     @yield('content')
   </main>
 
