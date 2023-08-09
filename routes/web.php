@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/recommended', function () {
+    return view('recommended');
+})->name('recommended');
+
+Route::get('/add', function () {
+    return view('add');
+})->name('add');
+
 Route::get('/account', function () {
     return view('account');
 })->name('account');

@@ -8,6 +8,7 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+
 body {
   position: relative;
   overflow-x: scroll;
@@ -113,6 +114,7 @@ nav{
   border-radius: 24px;
   background: #FFF;
   padding-left: 42px;
+  border:none;
 }
 ::placeholder{
   color: $white2;

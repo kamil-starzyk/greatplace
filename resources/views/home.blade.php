@@ -10,6 +10,10 @@
           <input type="text" name="search_phrase" class="search-bar" placeholder="Wyszukaj">
           <img src="{{ asset('img/icons/search.png') }}" class="search-icon" alt="">
           <img src="{{ asset('img/icons/filters.png') }}" class="filters-icon" id="filters-icon" alt="">
+          
+          <div class="filters">
+            
+          </div>
         </form>
       </div>
       <div class="content-box">
