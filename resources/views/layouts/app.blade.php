@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ config('app.name', 'Laravel') }}</title>
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body class="{{ (Route::has('home') ? 'dark-theme':'' )}}">
