@@ -138,7 +138,7 @@ nav{
   width: 100%;
   height: 48px;
   border-radius: 24px;
-  background: #FFF;
+  background: $white1;
   padding-left: 42px;
   border:none;
   margin-bottom: 53px;
@@ -158,11 +158,18 @@ nav{
   display: flex;
 }
 .button-round{
-  background-color: #FFFfff;
-  padding: 11px;
+  background-color: $white1;
+  padding: 10px;
   border-radius: 24px;
   min-width: 64px;
   text-align: center;
+  border: 1px solid $white2;
+  font-size: 14px;
+  line-height: 142.475%;
+}
+.button-round.pressed{
+  background-color: $black2;
+  color: $white1;
   border: 1px solid transparent;
 }
 
@@ -175,4 +182,62 @@ nav{
   padding: 16px;
   flex-grow: 1;
   overflow: scroll;
+}
+
+.categories{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.propositions{
+  position: relative;
+  height: 265px;
+  width: 100%;
+}
+.roller-wrap{
+  position:absolute;
+  left:0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.roller-body{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; 
+  gap: 16px;
+}
+.roller-card{
+  width: 264px;
+  flex: 0 0 auto; 
+}
+.roller-card img{
+  width: 100%;
+  height: 195px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+.city-n-likes{
+  position: relative;
+}
+.right-span{
+  position: absolute;
+  right: 0;
+}
+.la-heart{
+  color: $white2;
+}
+.la-heart.liked{
+  color:#FF6584;
+}
+.likes-counter{
+  color: #CCC;
+  font-family: Roboto;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 162.475%
 }
