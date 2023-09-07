@@ -33,7 +33,7 @@
         </form>
       </div>
       <div class="content-box">
-        <h2 style="margin-bottom: 24px">Popularne</h2>
+        <h2 style="margin-bottom: 14px">Popularne</h2>
         <div class="categories">
           <div class="button-round pressable">Plener</div>
           <div class="button-round pressable">Wewnątrz</div>
