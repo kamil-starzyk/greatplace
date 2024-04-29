@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('Greatplace', 'Laravel'),
+    'name' => env('greatplace', 'Greatplace'),
 
     /*
     |--------------------------------------------------------------------------
