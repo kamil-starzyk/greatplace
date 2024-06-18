@@ -13,6 +13,10 @@
         "laravel-vite-plugin": "^1.0",
         "sass": "^1.56.1",
         "vite": "^5.0",
-        "vue": "^3.2.37"
+        "vue": "^3.4.29"
+    },
+    "dependencies": {
+        "vue-loader": "^17.4.2",
+        "vue-template-compiler": "^2.7.16"
     }
 }

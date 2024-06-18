@@ -9,5 +9,8 @@ Route::get('/', function () {
 Route::get('/add', function () {
     return view('add');
 });
-Route::get('/add-form-1', [FormAddController::class, 'showStep1'])->name('add-form-1');
-Route::post('/add-form-1', [FormAddController::class, 'postStep1']);
+
+Route::get('/add-form', function () {
+    return view('add-form');
+});
+Route::post('/submit-add-form', [FormController::class, 'submitForm']);
