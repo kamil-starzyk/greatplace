@@ -1,0 +1,41 @@
+#main-wrapper{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 194px);
+  font-family: Mulish;
+}
+#main-box{
+  max-width: 607px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+img.obraz-ludzi{
+  margin-bottom: 47px;
+}
+h2.dodaj-miejsce{
+  font-size: 34px;
+  margin-bottom: 16px;
+}
+p.przeslij-lokalizacje{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  width: 412px;
+  margin-bottom: 22px;
+}
+.przycisk{
+  height: 48px;
+  border-radius: 24px;
+}
+
+
+/* Form1 */
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}

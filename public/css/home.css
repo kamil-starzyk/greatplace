@@ -1,0 +1,74 @@
+/*POLECANE*/
+#main-wrapper{
+  margin:0 80px;
+}
+#categories{
+  display: flex;
+  margin-top: 47px;
+}
+.category-item{
+  margin-right: 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.category-item:hover{
+  background-color: #F1F3F4;
+}
+.category-item.btn-black:hover{
+  background-color: #1A1A1A;
+}
+
+
+#suggested-wrapper{
+  margin-top: 41px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 24px;
+}
+.card-suggested{
+  display: block;
+}
+.card-image{
+  overflow: hidden;
+  border-radius: 16px;
+}
+.card-image img{
+  object-fit: cover; 
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.card-details{
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px;
+}
+.place-localisation{
+  color: #9A98A1;
+}
+.map_pin_icon{
+  transform: translateY(3px); 
+}
+
+
+/* MEDIA */
+@media (max-width: 1200px) {
+  #suggested-wrapper {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  #suggested-wrapper {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  #suggested-wrapper {
+      grid-template-columns: 1fr; /* 1 column on very small screens */
+  }
+}
