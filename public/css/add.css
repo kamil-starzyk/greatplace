@@ -2,9 +2,11 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: calc(100vh - 194px);
+  min-height: calc(100vh - 194px);
   font-family: Mulish;
+}
+.wrapper-box{
+  width: calc(100vw - 366px)
 }
 #main-box{
   max-width: 607px;
@@ -25,17 +27,98 @@ p.przeslij-lokalizacje{
   font-weight: 300;
   width: 412px;
   margin-bottom: 22px;
+  line-height: 27.58px;
 }
 .przycisk{
   height: 48px;
   border-radius: 24px;
 }
 
+#header-box{
+  margin-top: 50px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
 
-/* Form1 */
-.box__dragndrop,
-.box__uploading,
-.box__success,
-.box__error {
-  display: none;
+.drop-zone{
+  width:1000px;
+  height: 356px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid #EAEAEA;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping if there are too many thumbnails */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+li.file-preview {
+  width: 100px; /* Fixed width for square thumbnail */
+  height: 100px; /* Fixed height for square thumbnail */
+  margin: 5px; /* Space between thumbnails */
+  overflow: hidden; /* Ensures content fits within the square */
+}
+
+li.file-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+
+
+.checkbox-strong{
+  margin-top: 18px;
+  margin-bottom: 12px;
+  display: block;
+}
+.checkbox-text{
+  margin-left: 10px;
+  color: #B6B6B6;
+}
+
+#form-progress{
+  display: flex;
+  margin-top: 48px;
+  align-items: center;
+}
+.step{
+  padding: 0 10px;
+  white-space: nowrap;
+  font-weight: 700;
+  color: #CCCCCC;
+}
+.active-step{
+  color: #1A1A1A;
+}
+.bold-strip {
+  flex: 1;
+  height: 1px;
+  background-color: #D9D9D9; /* Change to desired line color */
+}
+
+#form-navigation{
+  margin-top: 70px;
+  position: relative;
+}
+.right-button{
+  position: absolute;
+  right:0;
+  width:181px;
+  height: 48px;
+}
+.left-button{
+  position: absolute;
+  left:0;
+  width:181px;
+  height: 48px;
+  background-color: #F1F3F4;
 }

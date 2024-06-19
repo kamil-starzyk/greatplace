@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main-wrapper">
     <step1 v-if="step === 1" :formData="formData" :nextStep="nextStep"></step1>
     <step2 v-if="step === 2" :formData="formData" :previousStep="previousStep" :nextStep="nextStep"></step2>
     <step3 v-if="step === 3" :formData="formData" :previousStep="previousStep" :submitForm="submitForm"></step3>

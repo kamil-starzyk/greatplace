@@ -14,3 +14,8 @@ Route::get('/add-form', function () {
     return view('add-form');
 });
 Route::post('/submit-add-form', [FormController::class, 'submitForm']);
+
+
+Route::get('/regulamin', function () {
+    return view('regulamin');
+});
