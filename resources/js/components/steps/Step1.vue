@@ -5,15 +5,19 @@
         <p class="przeslij-lokalizacje">Prześlij lokalizacje i zdjęcia ciekawego miejsca, które świetnie sprawdzi się podczas sesji fotograficznej</p>
     </div>
     <DropZone class="drop-area" @files-dropped="addFiles" #default="{ dropZoneActive }">
-      <div v-if="dropZoneActive">
-          <div class="drop-zone"><img src="/img/add_page_picture_2_active.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
-      </div>
-      <div v-else>
-          <div class="drop-zone"><img src="/img/add_page_picture_2.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
-      </div>
+      <label for="file-input">
+        <div v-if="dropZoneActive">
+            <div class="drop-zone"><img src="/img/add_page_picture_2_active.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
+        </div>
+        <div v-else>
+            <div class="drop-zone"><img src="/img/add_page_picture_2.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
+        </div>
+        
+        <input type="file" id="file-input" multiple @change="onInputChange" />
+      </label>
     </DropZone>
     <ul class="image-list" v-if="files.length > 0">
-      <FilePreview v-for="file of files" :key="file.id" :file="file" tag="li" />
+      <FilePreview v-for="file of files" :key="file.id" :file="file" tag="li" @remove="removeFile"/>
     </ul>
     <ul class="image-list" v-else>
       <li class="file-preview">
@@ -56,19 +60,25 @@ import useFileList from '../../compositions/file-list'
 import DropZone from '../DropZone.vue'
 import  FilePreview  from  '../FilePreview.vue'
 
-const { files, addFiles, removeFile } = useFileList()
 export default {
   props: ['formData', 'nextStep'],
   components: {DropZone, FilePreview},
-  setup() {
+  setup(props, { emit }) {
     const { files, addFiles, removeFile } = useFileList();
-
+    
+    function onInputChange(e) {
+      const fileArray = Array.from(e.target.files);
+      addFiles(e.target.files);
+      e.target.value = null;
+      emit('update-photos', fileArray);
+    }
     console.log('files imported successfully:', files);
 
     return {
       files,
       addFiles,
       removeFile,
+      onInputChange
     };
   },
   methods: {
@@ -77,4 +87,5 @@ export default {
     }
   }
 }
+
 </script>
