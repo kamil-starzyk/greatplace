@@ -4,7 +4,11 @@
         <h2 class="dodaj-miejsce">Podaj lokalizacje miejsca</h2>
         <p class="przeslij-lokalizacje">Uzupełnij dane o lokalizacji, aby każdy mógł łatwo je znaleźć</p>
     </div>
-    <input type="text" v-model="formData.location" placeholder="Enter location">
+    <div id="localisation-form">
+      <input type="text" v-model="formData.placeName" placeholder="Nazwa miejsca">
+      <select name="" v-model="formData.wojewodztwo" id=""></select>
+
+    </div>
 
     <div id="form-progress">
       <div class="step">
