@@ -25,7 +25,10 @@ export default {
       step: 1,
       formData: {
         photos: [],
-        location: '',
+        placeName: '',
+        selectedVoivodeship: '',
+        selectedDistrict: '',
+        selectedLocality: '',
         title: '',
         description: ''
       }
