@@ -1,23 +1,22 @@
 <template>
   <div class="wrapper-box">
     <div id="header-box">
-        <h2 class="dodaj-miejsce">Wybierz zdjęcia do publikacji</h2>
-        <p class="przeslij-lokalizacje">Prześlij lokalizacje i zdjęcia ciekawego miejsca, które świetnie sprawdzi się podczas sesji fotograficznej</p>
+      <h2 class="dodaj-miejsce">Wybierz zdjęcia do publikacji</h2>
+      <p class="przeslij-lokalizacje">Prześlij lokalizacje i zdjęcia ciekawego miejsca, które świetnie sprawdzi się podczas sesji fotograficznej</p>
     </div>
-    <DropZone class="drop-area" @files-dropped="addFiles" #default="{ dropZoneActive }">
+    <DropZone class="drop-area" @files-dropped="onFilesDropped" #default="{ dropZoneActive }">
       <label for="file-input">
         <div v-if="dropZoneActive">
-            <div class="drop-zone"><img src="/img/add_page_picture_2_active.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
+          <div class="drop-zone"><img src="/img/add_page_picture_2_active.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
         </div>
         <div v-else>
-            <div class="drop-zone"><img src="/img/add_page_picture_2.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
+          <div class="drop-zone"><img src="/img/add_page_picture_2.png" alt="ilustracja kilku zdjęć w tym zdjęcie natury" class="drop-zone-picture"></div>
         </div>
-        
         <input type="file" id="file-input" multiple @change="onInputChange" />
       </label>
     </DropZone>
-    <ul class="image-list" v-if="files.length > 0">
-      <FilePreview v-for="file of files" :key="file.id" :file="file" tag="li" @remove="removeFile"/>
+    <ul class="image-list" v-if="formData.photos.length > 0">
+      <FilePreview v-for="(file, index) in formData.photos" :key="index" :file="file" tag="li" @remove="removeFile(file)" />
     </ul>
     <ul class="image-list" v-else>
       <li class="file-preview">
@@ -47,7 +46,6 @@
         <img src="/img/icons/rocket_light.png" alt="obrazek">
         <span> Tytuł i opis</span>
       </div>
-
     </div>
     <div id="form-navigation">
       <button @click="nextStep" class="btn-black btn-round right-button">Dalej</button>
@@ -56,36 +54,53 @@
 </template>
 
 <script>
-import useFileList from '../../compositions/file-list'
-import DropZone from '../DropZone.vue'
-import  FilePreview  from  '../FilePreview.vue'
+import DropZone from '../DropZone.vue';
+import FilePreview from '../FilePreview.vue';
 
 export default {
   props: ['formData', 'nextStep'],
-  components: {DropZone, FilePreview},
+  components: { DropZone, FilePreview },
   setup(props, { emit }) {
-    const { files, addFiles, removeFile } = useFileList();
-    
     function onInputChange(e) {
       const fileArray = Array.from(e.target.files);
-      addFiles(e.target.files);
+      addFiles(fileArray);
       e.target.value = null;
-      emit('update-photos', fileArray);
     }
-    console.log('files imported successfully:', files);
+
+    function onFilesDropped(fileArray) {
+      addFiles(fileArray);
+    }
+
+    function addFiles(newFiles) {
+      const uploadableFiles = newFiles
+        .filter(file => !fileExists(file))
+        .map(file => ({
+          file,
+          url: URL.createObjectURL(file),
+        }));
+
+      props.formData.photos = props.formData.photos.concat(uploadableFiles);
+    }
+
+    function fileExists(newFile) {
+      const newFileId = `${newFile.name}-${newFile.size}-${newFile.lastModified}-${newFile.type}`;
+      return props.formData.photos.some(file => {
+        const existingFileId = `${file.file.name}-${file.file.size}-${file.file.lastModified}-${file.file.type}`;
+        return existingFileId === newFileId;
+      });
+    }
+
+    function removeFile(fileToRemove) {
+      props.formData.photos = props.formData.photos.filter(file => file.file !== fileToRemove.file);
+      emit('update-photos', props.formData.photos);
+    }
 
     return {
-      files,
-      addFiles,
+      onInputChange,
+      onFilesDropped,
       removeFile,
-      onInputChange
+      formData: props.formData
     };
-  },
-  methods: {
-    handlePhotos(event) {
-      this.formData.photos = Array.from(event.target.files);
-    }
   }
 }
-
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="main-wrapper">
-    <step1 v-if="step === 1" :formData="formData" :nextStep="nextStep" @update-photos="updatePhotos"></step1>
+    <step1 v-if="step === 1" :formData="formData" :nextStep="nextStep"></step1>
     <step2 v-if="step === 2" :formData="formData" :previousStep="previousStep" :nextStep="nextStep"></step2>
     <step3 v-if="step === 3" :formData="formData" :previousStep="previousStep" :submitForm="submitForm"></step3>
     <div v-if="step === 4">
@@ -42,9 +42,6 @@ export default {
         this.step--;
       }
     },
-    updatePhotos(files) {
-      this.formData.photos = files;
-    },
     async submitForm() {
       const formData = new FormData();
       this.formData.photos.forEach((photo, index) => {
@@ -70,7 +67,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-/* Dodaj swoje style */
-</style>
