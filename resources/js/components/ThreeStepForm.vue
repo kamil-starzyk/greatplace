@@ -29,6 +29,7 @@ export default {
         selectedVoivodeship: '',
         selectedDistrict: '',
         selectedLocality: '',
+        streetAddress: '',
         title: '',
         description: ''
       }

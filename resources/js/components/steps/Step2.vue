@@ -1,13 +1,14 @@
 <template>
-  <div class="wrapper-box">
-    <div id="header-box">
-        <h2 class="dodaj-miejsce">Podaj lokalizacje miejsca</h2>
-        <p class="przeslij-lokalizacje">Uzupełnij dane o lokalizacji, aby każdy mógł łatwo je znaleźć</p>
-    </div>
-    <div id="localisation-form">
+  <div>
+    <form @submit.prevent="handleSubmit">
       <div>
         <label for="placeName">Nazwa miejsca:</label>
-        <input type="text" id="placeName" v-model="formData.placeName">
+        <input type="text" id="placeName" v-model="formData.placeName" @input="filterLocalities">
+        <ul v-if="filteredLocalities.length">
+          <li v-for="locality in filteredLocalities" :key="locality.name" @click="selectLocality(locality)">
+            {{ locality.name }} ({{ locality.district }}, {{ locality.voivodeship }})
+          </li>
+        </ul>
       </div>
 
       <div>
@@ -30,35 +31,12 @@
         <label for="locality">Miejscowość:</label>
         <input type="text" id="locality" v-model="formData.selectedLocality" list="localities">
         <datalist id="localities">
-          <option v-for="locality in filteredLocalities" :key="locality">{{ locality }}</option>
+          <option v-for="locality in availableLocalities" :key="locality.name">{{ locality.name }}</option>
         </datalist>
       </div>
-    </div>
 
-    <div id="form-progress">
-      <div class="step">
-        <span>Krok 1 </span>
-        <img src="/img/icons/picture_light.png" alt="obrazek">
-        <span> Wybór zdjęć</span>
-      </div>
-      <div class="bold-strip"></div>
-      <div class="step active-step">
-        <span>Krok 2 </span>
-        <img src="/img/icons/localisation_black.png" alt="obrazek">
-        <span> Lokalizacja</span>
-      </div>
-      <div class="bold-strip"></div>
-      <div class="step">
-        <span>Krok 3 </span>
-        <img src="/img/icons/rocket_light.png" alt="obrazek">
-        <span> Tytuł i opis</span>
-      </div>
-    </div>
-    <div id="form-navigation">
-      <button @click="nextStep" class="btn-black btn-round right-button">Dalej</button>
-      <button @click="previousStep" class="btn-round left-button">Wstecz</button>
-    </div>
-
+      <button type="submit">Zatwierdź</button>
+    </form>
   </div>
 </template>
 
@@ -66,41 +44,108 @@
 import miejscowosci from '../../data/miejscowosci.json';
 
 export default {
-  props: ['formData', 'previousStep', 'nextStep'],
+  props: {
+    formData: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       voivodeships: [],
       districts: [],
-      localities: []
+      availableLocalities: [],
+      allLocalities: [],
+      filteredLocalities: []
     };
   },
-  computed: {
-    filteredLocalities() {
-      return this.localities.filter(locality => 
-        locality.toLowerCase().startsWith(this.formData.selectedLocality.toLowerCase())
-      );
+  watch: {
+    'formData.selectedVoivodeship': {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          this.updateDistricts();
+        }
+      }
+    },
+    'formData.selectedDistrict': {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          this.updateLocalities();
+        }
+      }
     }
   },
   methods: {
     updateDistricts() {
       const selectedVoivodeshipData = this.voivodeships.find(v => v.name === this.formData.selectedVoivodeship);
       this.districts = selectedVoivodeshipData ? selectedVoivodeshipData.districts : [];
-      this.formData.selectedDistrict = '';
-      this.localities = [];
-      this.formData.selectedLocality = '';
+      if (!this.districts.find(d => d.name === this.formData.selectedDistrict)) {
+        this.formData.selectedDistrict = '';
+      }
+      this.updateLocalities();
     },
     updateLocalities() {
       const selectedDistrictData = this.districts.find(d => d.name === this.formData.selectedDistrict);
-      this.localities = selectedDistrictData ? selectedDistrictData.localities : [];
-      this.formData.selectedLocality = '';
+      this.availableLocalities = selectedDistrictData ? selectedDistrictData.localities : [];
+      if (!this.availableLocalities.find(l => l.name === this.formData.selectedLocality)) {
+        this.formData.selectedLocality = '';
+      }
+    },
+    filterLocalities() {
+      if (this.formData.placeName.length > 0) {
+        const searchText = this.formData.placeName.toLowerCase();
+        this.filteredLocalities = this.allLocalities.filter(locality =>
+          locality.name.toLowerCase().startsWith(searchText)
+        );
+      } else {
+        this.filteredLocalities = [];
+      }
+    },
+    selectLocality(locality) {
+      this.formData.placeName = locality.name;
+      this.formData.selectedVoivodeship = locality.voivodeship;
+      this.formData.selectedDistrict = locality.district;
+      this.formData.selectedLocality = locality.name;
+      this.filteredLocalities = [];
+    },
+    handleSubmit() {
+      this.$emit('submit');
     }
   },
   created() {
     this.voivodeships = miejscowosci;
+    this.allLocalities = miejscowosci.flatMap(voivodeship => 
+      voivodeship.districts.flatMap(district => 
+        district.localities.map(locality => ({
+          name: locality.name,
+          district: district.name,
+          voivodeship: voivodeship.name
+        }))
+      )
+    );
   }
-}
+};
 </script>
 
 <style scoped>
-/* Dodaj swoje style */
+/* Możesz dodać swoje style tutaj */
+ul {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #f0f0f0;
+}
 </style>
