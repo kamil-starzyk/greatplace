@@ -30,7 +30,8 @@ export default {
         selectedDistrict: '',
         selectedLocality: '',
         streetAddress: '',
-        title: '',
+        coordinates: '',
+        easeOfAccess: '',
         description: ''
       }
     };

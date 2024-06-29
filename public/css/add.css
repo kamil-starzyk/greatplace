@@ -94,7 +94,7 @@ li.file-preview img {
   margin-left: 10px;
   color: #B6B6B6;
 }
-#form-localisation{
+.two-column-form{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
@@ -104,7 +104,7 @@ li.file-preview img {
 }
 
 
-#placeName{
+#placeName, #description{
   grid-column: 1;
   grid-row: 1;
 }#voivodeship{
@@ -119,6 +119,25 @@ li.file-preview img {
 }#streetAddress{
   grid-column: 2;
   grid-row: 1;
+}#coordinates{
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  gap: 8px;
+}#ease-of-access{
+  grid-column: 2;
+  grid-row: 3;
+}
+#coordinates .basic-input{
+  flex-grow: 1
+}
+#ease-of-access .buttons{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hide-radio{
+  display: none;
 }
 
 @media (max-width: 900px) {

@@ -4,8 +4,10 @@
         <h2 class="dodaj-miejsce">Opis miejsca</h2>
         <p class="przeslij-lokalizacje">Podaj krótki opis miejsca tak by inni wiedzieli co mogą tam znaleźć.</p>
     </div>
-    <input type="text" v-model="formData.title" placeholder="Enter title">
-    <textarea v-model="formData.description" placeholder="Enter description"></textarea>
+     
+    <div class="two-column-form">
+      <textarea type="text" id="description" class="basic-input" v-model="formData.description" placeholder="Opis miejsca"></textarea><br>
+    </div>
 
     <div id="form-progress">
       <div class="step">

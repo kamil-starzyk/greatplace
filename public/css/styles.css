@@ -83,6 +83,9 @@ nav{
 /* buttons and stuff */
 .btn-round{
   border:1px solid #EAEAEA;
+  background-color: #F1F3F4;
+  color: #5D5D5D;
+  font-weight: 700;
   border-radius: 23px;
   min-width: 96px;
   height:39px;
@@ -95,6 +98,14 @@ nav{
 .btn-black{
   background-color: #1A1A1A;
   color: #FFFFFF;
+}
+.btn-square{
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
 }
 
 .basic-input{
