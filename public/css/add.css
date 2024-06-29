@@ -44,7 +44,6 @@ p.przeslij-lokalizacje{
 }
 
 .drop-zone{
-  width:1000px;
   height: 356px;
   display:flex;
   justify-content: center;
@@ -95,7 +94,43 @@ li.file-preview img {
   margin-left: 10px;
   color: #B6B6B6;
 }
+#form-localisation{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
+
+#placeName{
+  grid-column: 1;
+  grid-row: 1;
+}#voivodeship{
+  grid-column: 1;
+  grid-row: 2;
+}#district{
+  grid-column: 1;
+  grid-row: 3;
+}#locality{
+  grid-column: 1;
+  grid-row: 4;
+}#streetAddress{
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (max-width: 900px) {
+  #form-localisation {
+    grid-template-columns: 1fr;
+  }
+  #streetAddress{
+    grid-column: 1;
+    grid-row: 5;
+  }
+}
+/* sterowanie */
 #form-progress{
   display: flex;
   margin-top: 48px;

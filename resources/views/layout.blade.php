@@ -11,7 +11,9 @@
 <body>
   <header>
     <div id="logo">
-      <img src="{{ asset('img/logo.png') }}" alt="Logo">
+      <a href="/">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo">
+        </a>
     </div>
     <nav>
       <ul class="main_links">

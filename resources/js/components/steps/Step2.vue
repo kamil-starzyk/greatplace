@@ -1,42 +1,55 @@
 <template>
-  <div>
-    <form @submit.prevent="handleSubmit">
-      <div>
-        <label for="placeName">Nazwa miejsca:</label>
-        <input type="text" id="placeName" v-model="formData.placeName" @input="filterLocalities">
-        <ul v-if="filteredLocalities.length">
-          <li v-for="locality in filteredLocalities" :key="locality.name" @click="selectLocality(locality)">
-            {{ locality.name }} ({{ locality.district }}, {{ locality.voivodeship }})
-          </li>
-        </ul>
-      </div>
+  <div class="wrapper-box">
+    <div id="header-box">
+        <h2 class="dodaj-miejsce">Podaj lokalizacje miejsca</h2>
+        <p class="przeslij-lokalizacje">Uzupełnij dane o lokalizacji, aby każdy mógł łatwo je znaleźć</p>
+    </div>
+    
+    <div id="form-localisation">
+      <input type="text" id="placeName" class="basic-input" v-model="formData.placeName" placeholder="Nazwa miejsca"><br>
 
-      <div>
-        <label for="voivodeship">Województwo:</label>
-        <select id="voivodeship" v-model="formData.selectedVoivodeship" @change="updateDistricts">
-          <option value="" disabled>Wybierz województwo</option>
-          <option v-for="voivodeship in voivodeships" :key="voivodeship.name" :value="voivodeship.name">{{ voivodeship.name }}</option>
-        </select>
-      </div>
+      <select id="voivodeship" class="basic-input" v-model="formData.selectedVoivodeship" @change="updateDistricts">
+        <option value="" disabled>Wybierz województwo</option>
+        <option v-for="voivodeship in voivodeships" :key="voivodeship.name" :value="voivodeship.name">{{ voivodeship.name }}</option>
+      </select><br>
 
-      <div>
-        <label for="district">Powiat:</label>
-        <select id="district" v-model="formData.selectedDistrict" @change="updateLocalities" :disabled="!formData.selectedVoivodeship">
-          <option value="" disabled>Wybierz powiat</option>
-          <option v-for="district in districts" :key="district.name" :value="district.name">{{ district.name }}</option>
-        </select>
-      </div>
+      <select id="district" class="basic-input" v-model="formData.selectedDistrict" @change="updateLocalities" :disabled="!formData.selectedVoivodeship">
+        <option value="" disabled>Wybierz powiat</option>
+        <option v-for="district in districts" :key="district.name" :value="district.name">{{ district.name }}</option>
+      </select><br>
 
-      <div>
-        <label for="locality">Miejscowość:</label>
-        <input type="text" id="locality" v-model="formData.selectedLocality" list="localities">
-        <datalist id="localities">
-          <option v-for="locality in availableLocalities" :key="locality.name">{{ locality.name }}</option>
-        </datalist>
-      </div>
+      <select id="locality" class="basic-input" v-model="formData.selectedLocality" :disabled="!formData.selectedDistrict">
+        <option value="" disabled>Wybierz miejscowość</option>
+        <option v-for="locality in localities" :key="locality.name" :value="locality.name">{{ locality.name }}</option>
+      </select><br>
 
-      <button type="submit">Zatwierdź</button>
-    </form>
+      <input type="text" id="streetAddress" class="basic-input" v-model="formData.streetAddress" placeholder="Ulica i nummer domu (opcjonalne)">
+    </div>
+
+    <div id="form-progress">
+      <div class="step">
+        <span>Krok 1 </span>
+        <img src="/img/icons/picture_light.png" alt="obrazek">
+        <span> Wybór zdjęć</span>
+      </div>
+      <div class="bold-strip"></div>
+      <div class="step active-step">
+        <span>Krok 2 </span>
+        <img src="/img/icons/localisation_black.png" alt="obrazek">
+        <span> Lokalizacja</span>
+      </div>
+      <div class="bold-strip"></div>
+      <div class="step">
+        <span>Krok 3 </span>
+        <img src="/img/icons/rocket_light.png" alt="obrazek">
+        <span> Tytuł i opis</span>
+      </div>
+    </div>
+    <div id="form-navigation">
+      <button @click="nextStep" class="btn-black btn-round right-button">Dalej</button>
+      <button @click="previousStep" class="btn-round left-button">Wstecz</button>
+    </div>
+
   </div>
 </template>
 
@@ -44,19 +57,16 @@
 import miejscowosci from '../../data/miejscowosci.json';
 
 export default {
-  props: {
-    formData: {
-      type: Object,
-      required: true
-    }
-  },
+  props: [
+    'formData',
+    'previousStep', 
+    'nextStep'
+  ],
   data() {
     return {
       voivodeships: [],
       districts: [],
-      availableLocalities: [],
-      allLocalities: [],
-      filteredLocalities: []
+      localities: []
     };
   },
   watch: {
@@ -88,64 +98,14 @@ export default {
     },
     updateLocalities() {
       const selectedDistrictData = this.districts.find(d => d.name === this.formData.selectedDistrict);
-      this.availableLocalities = selectedDistrictData ? selectedDistrictData.localities : [];
-      if (!this.availableLocalities.find(l => l.name === this.formData.selectedLocality)) {
+      this.localities = selectedDistrictData ? selectedDistrictData.localities : [];
+      if (!this.localities.find(l => l.name === this.formData.selectedLocality)) {
         this.formData.selectedLocality = '';
       }
-    },
-    filterLocalities() {
-      if (this.formData.placeName.length > 0) {
-        const searchText = this.formData.placeName.toLowerCase();
-        this.filteredLocalities = this.allLocalities.filter(locality =>
-          locality.name.toLowerCase().startsWith(searchText)
-        );
-      } else {
-        this.filteredLocalities = [];
-      }
-    },
-    selectLocality(locality) {
-      this.formData.placeName = locality.name;
-      this.formData.selectedVoivodeship = locality.voivodeship;
-      this.formData.selectedDistrict = locality.district;
-      this.formData.selectedLocality = locality.name;
-      this.filteredLocalities = [];
-    },
-    handleSubmit() {
-      this.$emit('submit');
     }
   },
   created() {
     this.voivodeships = miejscowosci;
-    this.allLocalities = miejscowosci.flatMap(voivodeship => 
-      voivodeship.districts.flatMap(district => 
-        district.localities.map(locality => ({
-          name: locality.name,
-          district: district.name,
-          voivodeship: voivodeship.name
-        }))
-      )
-    );
   }
 };
 </script>
-
-<style scoped>
-/* Możesz dodać swoje style tutaj */
-ul {
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
-  padding: 0;
-  list-style: none;
-  margin: 0;
-}
-
-li {
-  padding: 5px;
-  cursor: pointer;
-}
-
-li:hover {
-  background-color: #f0f0f0;
-}
-</style>
