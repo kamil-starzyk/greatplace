@@ -1,67 +1,75 @@
 <template>
   <div class="wrapper-box">
     <div id="header-box">
-        <h2 class="dodaj-miejsce">Podaj lokalizacje miejsca</h2>
-        <p class="przeslij-lokalizacje">Uzupełnij dane o lokalizacji, aby każdy mógł łatwo je znaleźć</p>
+      <h2 class="dodaj-miejsce">Podaj lokalizacje miejsca</h2>
+      <p class="przeslij-lokalizacje">Uzupełnij dane o lokalizacji, aby każdy mógł łatwo je znaleźć</p>
     </div>
     
     <div class="two-column-form">
-      <input type="text" id="placeName" class="basic-input" v-model="formData.placeName" placeholder="Nazwa miejsca"><br>
+      <div id="place-name">
+        <input type="text" class="basic-input" v-model="formData.placeName" placeholder="Nazwa miejsca"><br>
+      </div>
 
-      <select id="voivodeship" class="basic-input" v-model="formData.selectedVoivodeship" @change="updateDistricts">
-        <option value="" disabled>Wybierz województwo</option>
-        <option v-for="voivodeship in voivodeships" :key="voivodeship.name" :value="voivodeship.name">{{ voivodeship.name }}</option>
-      </select><br>
+      <div id="voivodeship">
+        <select class="basic-input" v-model="formData.selectedVoivodeship" @change="updateDistricts">
+          <option value="" disabled>Wybierz województwo</option>
+          <option v-for="voivodeship in voivodeships" :key="voivodeship.name" :value="voivodeship.name">{{ voivodeship.name }}</option>
+        </select><br>
+      </div>
 
-      <select id="district" class="basic-input" v-model="formData.selectedDistrict" @change="updateLocalities" :disabled="!formData.selectedVoivodeship">
-        <option value="" disabled>Wybierz powiat</option>
-        <option v-for="district in districts" :key="district.name" :value="district.name">{{ district.name }}</option>
-      </select><br>
+      <div id="district">
+        <select class="basic-input" v-model="formData.selectedDistrict" @change="updateLocalities" :readonly="!formData.selectedVoivodeship">
+          <option value="" disabled>Wybierz powiat</option>
+          <option v-for="district in districts" :key="district.name" :value="district.name">{{ district.name }}</option>
+        </select><br>
+      </div>
 
-      <select id="locality" class="basic-input" v-model="formData.selectedLocality" :disabled="!formData.selectedDistrict">
-        <option value="" disabled>Wybierz miejscowość</option>
-        <option v-for="locality in localities" :key="locality.name" :value="locality.name">{{ locality.name }}</option>
-      </select><br>
+      <div id="locality">
+        <select class="basic-input" v-model="formData.selectedLocality" :readonly="!formData.selectedDistrict">
+          <option value="" disabled>Wybierz miejscowość</option>
+          <option v-for="locality in localities" :key="locality.name" :value="locality.name">{{ locality.name }}</option>
+        </select><br>
+      </div>
 
-      <input type="text" id="streetAddress" class="basic-input" v-model="formData.streetAddress" placeholder="Ulica i nummer domu (opcjonalne)">
+      <div id="street-address">
+        <input type="text" class="basic-input" v-model="formData.streetAddress" placeholder="Ulica i nummer domu (opcjonalne)">
+      </div>
 
       <div id="coordinates">
-        <input type="text" class="basic-input" v-model="formData.coordinates" placeholder="Współrzędne" readonly>
+        <input type="text" class="basic-input" v-model="formData.latitude" placeholder="Szerokość" readonly>
+        <input type="text" class="basic-input " v-model="formData.longitude" placeholder="Długość" readonly>
         <div class="btn-square btn-black" @click="openMap">
           <img src="/img/icons/map_pin_white.png" alt="">
         </div>
       </div>
 
-      
       <div id="ease-of-access">
         <p style="margin-bottom: 23px"><strong>Dojazd do miejsca</strong></p>
         <div class="buttons">
           <input type="radio" id="option1" class="hide-radio" value="Łatwy" v-model="formData.easeOfAccess">
           <label for="option1" class="btn-round" :class="{ 'btn-black': formData.easeOfAccess === 'Łatwy' }">Łatwy</label>
-          
+      
           <input type="radio" id="option2" class="hide-radio" value="Trudny" v-model="formData.easeOfAccess">
           <label for="option2" class="btn-round" :class="{ 'btn-black': formData.easeOfAccess === 'Trudny' }">Trudny</label>
-          
+      
           <input type="radio" id="option3" class="hide-radio" value="Brak dojazdu" v-model="formData.easeOfAccess">
           <label for="option3" class="btn-round" :class="{ 'btn-black': formData.easeOfAccess === 'Brak dojazdu' }">Brak dojazdu</label>
         </div>
       </div>
+    </div>
 
 
-
-      <div v-if="showMap" class="map-modal">
-        <div class="map-modal-content">
-          <l-map style="height: 400px; width: 100%;" :zoom="zoom" :center="center" @click="onMapClick">
-            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            <l-marker v-if="marker" :lat-lng="marker"></l-marker>
-          </l-map>
-          <div class="map-modal-buttons">
-            <button @click="confirmCoordinates" class="btn-black btn-round left">Confirm</button>
-            <button @click="closeMap" class="btn-round right">Cancel</button>
-          </div>
+    <div v-if="showMap" class="map-modal">
+      <div class="map-modal-content">
+        <l-map style="height: 400px; width: 100%;" :zoom="zoom" :center="center" @click="onMapClick">
+          <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+          <l-marker v-if="marker" :lat-lng="marker"></l-marker>
+        </l-map>
+        <div class="map-modal-buttons">
+          <button @click="confirmCoordinates" class="btn-black btn-round left">Confirm</button>
+          <button @click="closeMap" class="btn-round right">Cancel</button>
         </div>
       </div>
-
     </div>
 
     <div id="form-progress">
@@ -149,8 +157,10 @@ export default {
 
     const confirmCoordinates = () => {
       if (marker.value) {
-        const { lat, lng } = marker.value;
+        const [lat, lng] = marker.value;
         coordinates.value = `${lat}, ${lng}`;
+        console.log(coordinates.value)
+        
         props.formData.latitude = lat;
         props.formData.longitude = lng;
       }
@@ -164,6 +174,8 @@ export default {
 
     onMounted(() => {
       voivodeships.value = miejscowosci;
+      updateDistricts();
+      updateLocalities();
     });
 
     watch(() => props.formData.selectedVoivodeship, updateDistricts);
