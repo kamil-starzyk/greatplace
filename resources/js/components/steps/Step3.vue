@@ -7,10 +7,12 @@
      
     <div class="two-column-form">
       <div id="description">
+        <p style="margin-bottom: 23px"><strong>Opis miejsca</strong></p>
         <textarea type="text" class="basic-input" v-model="formData.description" placeholder="Opis miejsca"></textarea><br>
       </div>
       <div id="tags" class="basic-input">
         <div class="tag-input-box">
+          <p style="margin-bottom: 23px"><strong>Dodaj tagi</strong></p>
           Nowy tag: <input
           type="text"
           v-model="newTag"
@@ -21,8 +23,20 @@
           {{ tag }} <span class="tag-close" @click="removeTag(index)">×</span>
         </span>
       </div>
+      <div id="best-time">
+        <p style="margin-bottom: 23px"><strong>Kiedy miejsce wygląda najlepiej</strong></p>
+      <div class="button-group">
+        <button 
+          v-for="season in seasons" 
+          :key="season" 
+          :class="['btn-round', { 'btn-black': isSelected(season) }]" 
+          @click="toggleSeason(season)">
+          {{ season }}
+        </button>
+      </div>
     </div>
-   
+    </div>
+    
 
     <div id="form-progress">
       <div class="step">
@@ -57,6 +71,7 @@ export default {
   data() {
     return {
       newTag: '',
+      seasons: ['Wiosna', 'Lato', 'Jesień', 'Zima', 'Cały rok']
     }
   },
   methods: {
@@ -68,6 +83,26 @@ export default {
     },
     removeTag(index) {
       this.formData.tags.splice(index, 1);
+    },
+    toggleSeason(season) {
+      if (season === 'Cały rok') {
+        this.formData.bestSeasons = ['Cały rok'];
+      } else {
+        if (this.formData.bestSeasons.includes(season)) {
+          this.formData.bestSeasons = this.formData.bestSeasons.filter(s => s !== season);
+        } else {
+          this.formData.bestSeasons.push(season);
+        }
+        
+        if (this.formData.bestSeasons.length === 4) {
+          this.formData.bestSeasons = ['Cały rok'];
+        } else {
+          this.formData.bestSeasons = this.formData.bestSeasons.filter(s => s !== 'Cały rok');
+        }
+      }
+    },
+    isSelected(season) {
+      return this.formData.bestSeasons.includes(season);
     }
   }
 }

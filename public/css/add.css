@@ -151,6 +151,19 @@ li.file-preview img {
   grid-column: 1;
   grid-row:3;
 }
+#best-time{
+  grid-column: 2;
+  grid-row:1;
+}
+
+#best-time .button-group{
+  display: flex;
+  gap: 8px;
+}
+
+#best-time .btn-round{
+  min-width: 0;
+}
 
 @media (max-width: 1100px) {
   .two-column-form {
