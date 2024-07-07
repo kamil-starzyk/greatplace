@@ -139,6 +139,19 @@ li.file-preview img {
   display: none;
 }
 
+#description{
+  grid-column: 1;
+  grid-row:1 / span 2;
+  min-height: 140px;
+}
+#description .basic-input{
+  height: 100%;
+}
+#tags{
+  grid-column: 1;
+  grid-row:3;
+}
+
 @media (max-width: 1100px) {
   .two-column-form {
     grid-template-columns: 1fr;

@@ -33,7 +33,8 @@ export default {
         latitude: '',
         longitude: '',
         easeOfAccess: '',
-        description: ''
+        description: '',
+        tags: [],
       }
     };
   },
