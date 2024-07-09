@@ -25,16 +25,37 @@
       </div>
       <div id="best-time">
         <p style="margin-bottom: 23px"><strong>Kiedy miejsce wygląda najlepiej</strong></p>
-      <div class="button-group">
-        <button 
-          v-for="season in seasons" 
-          :key="season" 
-          :class="['btn-round', { 'btn-black': isSelected(season) }]" 
-          @click="toggleSeason(season)">
-          {{ season }}
-        </button>
+        <div class="button-group">
+          <button 
+            v-for="season in seasons" 
+            :key="season" 
+            :class="['btn-round', { 'btn-black': isSelected(season) }]" 
+            @click="toggleSeason(season)">
+            {{ season }}
+          </button>
+        </div>
       </div>
-    </div>
+      <div id="price">
+        <p style="margin-bottom: 23px"><strong>Cena</strong></p>
+        <div>
+          <input 
+            type="text" 
+            v-model="formData.price" 
+            @input="validatePrice" 
+            placeholder="0" 
+            class="basic-input price-input"
+          />zł
+        </div>
+        <div class="button-group">
+          <button 
+            v-for="option in priceOptions" 
+            :key="option" 
+            :class="['btn-round', { 'btn-black': this.formData.priceFor === option }]" 
+            @click="selectOption(option)">
+            {{ option }}
+          </button>
+        </div>
+      </div>
     </div>
     
 
@@ -71,7 +92,8 @@ export default {
   data() {
     return {
       newTag: '',
-      seasons: ['Wiosna', 'Lato', 'Jesień', 'Zima', 'Cały rok']
+      seasons: ['Wiosna', 'Lato', 'Jesień', 'Zima', 'Cały rok'],
+      priceOptions: ['Za godzinę', 'Za sesję', 'Za dzień', 'Bezpłatne', 'Miejsce publiczne'],
     }
   },
   methods: {
@@ -103,6 +125,28 @@ export default {
     },
     isSelected(season) {
       return this.formData.bestSeasons.includes(season);
+    },
+    validatePrice() {
+      if (!/^\d*\.?\d*$/.test(this.formData.price)) {
+      console.log("Bęc")
+        this.formData.price = this.formData.price.slice(0, -1);
+        this.formData.priceFor = 'Za godzinę'
+      }
+      if (this.formData.price === '0') {
+        this.formData.priceFor = 'Bezpłatne';
+        this.formData.price = '';
+      }
+      if (this.formData.priceFor === 'Bezpłatne' || this.formData.priceFor === 'Miejsce publiczne') {
+        if (this.formData.price !== '') {
+          this.formData.priceFor = 'Za godzinę';
+        }
+      }
+    },
+    selectOption(option) {
+      if (option === 'Bezpłatne' || option === 'Miejsce publiczne') {
+        this.formData.price = '';
+      }
+      this.formData.priceFor = option;
     }
   }
 }

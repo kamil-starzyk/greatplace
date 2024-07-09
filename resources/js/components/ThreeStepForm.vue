@@ -35,7 +35,9 @@ export default {
         easeOfAccess: '',
         description: '',
         tags: [],
-        bestSeasons: []
+        bestSeasons: [],
+        price: '',
+        priceFor: ''
       }
     };
   },
