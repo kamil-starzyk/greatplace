@@ -44,7 +44,7 @@
             @input="validatePrice" 
             placeholder="0" 
             class="basic-input price-input"
-          />zł
+          /> zł
         </div>
         <div class="button-group">
           <button 

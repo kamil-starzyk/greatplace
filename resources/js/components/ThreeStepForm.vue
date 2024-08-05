@@ -54,15 +54,28 @@ export default {
     },
     async submitForm() {
       const formData = new FormData();
-      this.formData.photos.forEach((photo, index) => {
-        formData.append(`photos[${index}]`, photo);
+      let price = this.formData.price === '' ? 0 : parseInt(this.formData.price, 10);
+
+      this.formData.photos.forEach((photo) => {
+        formData.append(`photos[]`, photo.file);
       });
-      formData.append('location', this.formData.location);
-      formData.append('title', this.formData.title);
+
+      formData.append('placeName', this.formData.placeName);
+      formData.append('selectedVoivodeship', this.formData.selectedVoivodeship);
+      formData.append('selectedDistrict', this.formData.selectedDistrict);
+      formData.append('selectedLocality', this.formData.selectedLocality);
+      formData.append('streetAddress', this.formData.streetAddress);
+      formData.append('latitude', this.formData.latitude);
+      formData.append('longitude', this.formData.longitude);
+      formData.append('easeOfAccess', this.formData.easeOfAccess);
       formData.append('description', this.formData.description);
+      formData.append('tags', JSON.stringify(this.formData.tags));
+      formData.append('bestSeasons', JSON.stringify(this.formData.bestSeasons));
+      formData.append('price', price);
+      formData.append('priceFor', this.formData.priceFor);
 
       try {
-        const response = await axios.post('/submit-form', formData, {
+        const response = await axios.post('/submit-add-form', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -72,6 +85,7 @@ export default {
         }
       } catch (error) {
         console.error('Error submitting form:', error);
+        alert('There was an error submitting the form. Please try again later.');
       }
     }
   }
