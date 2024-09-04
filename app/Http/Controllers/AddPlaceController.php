@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Place;
+use App\Models\Tag;
+use App\Models\Image;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -42,18 +45,10 @@ class AddPlaceController extends Controller
         }
 
         try {
-            // Handle file uploads
-            $photos = [];
-            if ($request->hasFile('photos')) {
-                foreach ($request->file('photos') as $photo) {
-                    $path = $photo->store('public/photos');
-                    $photos[] = $path;
-                }
-            }
+            DB::beginTransaction();
 
-            // Save the data to the database
+            // Save the Place data to the database
             $place = new Place();
-            $place->photos = json_encode($photos);
             $place->place_name = $request->placeName;
             $place->selected_voivodeship = $request->selectedVoivodeship;
             $place->selected_district = $request->selectedDistrict;
@@ -63,12 +58,38 @@ class AddPlaceController extends Controller
             $place->longitude = $request->longitude;
             $place->ease_of_access = $request->easeOfAccess;
             $place->description = $request->description;
-            $place->tags = json_encode($request->tags);
             $place->best_seasons = json_encode($request->bestSeasons);
             $place->price = $request->price;
             $place->price_for = $request->priceFor;
             $place->save();
 
+            // Handle file uploads and save images to the database
+            Log::info($request->file('photos'));
+            if ($request->hasFile('photos')) {
+                foreach ($request->file('photos') as $photo) {
+                    $path = $photo->store('public/photos');
+                    // Create a new Image record
+                    $image = new Image();
+                    $image->place_id = $place->id;
+                    $image->path = $path;
+                    $image->alt_text = '';
+                    $image->title = ''; 
+                    $image->save();
+                }
+            }
+
+            if ($request->has('tags')) {
+                $tagIds = [];
+                Log::info($request->tags);
+                foreach ($request->tags as $tagName) {
+                    $tag = Tag::firstOrCreate(['name' => $tagName]);
+                    $tagIds[] = $tag->id;
+                }
+                $place->tags()->sync($tagIds); // Przypisz tagi do miejsca
+            }
+
+            // Commit the transaction
+            DB::commit();
             return response()->json(['message' => 'Form submitted successfully'], 200);
         } catch (\Exception $e) {
             // Log the error for debugging

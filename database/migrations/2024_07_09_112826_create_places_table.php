@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
-            $table->json('photos')->nullable();
             $table->string('place_name');
             $table->string('selected_voivodeship');
             $table->string('selected_district');
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->decimal('longitude', 11, 8);
             $table->string('ease_of_access');
             $table->text('description');
-            $table->json('tags');
             $table->json('best_seasons');
             $table->decimal('price', 8, 2);
             $table->string('price_for');

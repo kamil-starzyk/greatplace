@@ -60,6 +60,11 @@ export default {
         formData.append(`photos[]`, photo.file);
       });
 
+      this.formData.tags.forEach((tag) => {
+        formData.append(`tags[]`, tag);
+      });
+      
+
       formData.append('placeName', this.formData.placeName);
       formData.append('selectedVoivodeship', this.formData.selectedVoivodeship);
       formData.append('selectedDistrict', this.formData.selectedDistrict);
@@ -69,7 +74,6 @@ export default {
       formData.append('longitude', this.formData.longitude);
       formData.append('easeOfAccess', this.formData.easeOfAccess);
       formData.append('description', this.formData.description);
-      formData.append('tags', JSON.stringify(this.formData.tags));
       formData.append('bestSeasons', JSON.stringify(this.formData.bestSeasons));
       formData.append('price', price);
       formData.append('priceFor', this.formData.priceFor);
