@@ -15,19 +15,19 @@
     </div>
     
     <div id="suggested-wrapper">
-        @for ($i = 0; $i < 16; $i++)
+        @foreach ($places as $place)
         <div class="card-suggested">
             <div class="card-image">
-                <img src="{{ asset('img/uploaded/sad_jabloni/thumbnail.jpg') }}" alt="">
+                <img src="{{ Storage::url($place->images[0]->path) }}" alt="Place Image">
             </div>
             <div class="card-details">
-                <h3>Sad jabłoni</h3>
+                <h3>{{$place->place_name}}</h3>
                 <p class="place-localisation">    
                     <img src="{{ asset('img/icons/map_pin.png') }}" class="map_pin_icon" alt=""> <span>Ciężkowice</span>
                 </p>
             </div>
         </div>
-        @endfor
+        @endforeach
     </div>
         
 </div>

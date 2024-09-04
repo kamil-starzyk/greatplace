@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddPlaceController;
+use App\Http\Controllers\PlaceController;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [PlaceController::class, 'show']);
+
 Route::get('/add', function () {
     return view('add');
 });
