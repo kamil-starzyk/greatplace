@@ -21,9 +21,13 @@
                 <img src="{{ Storage::url($place->images[0]->path) }}" alt="Place Image">
             </div>
             <div class="card-details">
-                <h3>{{$place->place_name}}</h3>
+            <h3>
+                <a href="{{ route('place.show', ['id' => $place->id]) }}">
+                    {{$place->name}}
+                </a>
+            </h3>
                 <p class="place-localisation">    
-                    <img src="{{ asset('img/icons/map_pin.png') }}" class="map_pin_icon" alt=""> <span>Ciężkowice</span>
+                    <img src="{{ asset('img/icons/map_pin.png') }}" class="map_pin_icon" alt=""> <span>{{$place->name}}</span>
                 </p>
             </div>
         </div>

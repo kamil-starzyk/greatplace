@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
-            $table->string('place_name');
-            $table->string('selected_voivodeship');
-            $table->string('selected_district');
-            $table->string('selected_locality');
+            $table->string('name');
+            $table->string('voivodeship');
+            $table->string('district');
+            $table->string('locality');
             $table->string('street_address');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);

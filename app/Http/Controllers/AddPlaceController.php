@@ -49,10 +49,10 @@ class AddPlaceController extends Controller
 
             // Save the Place data to the database
             $place = new Place();
-            $place->place_name = $request->placeName;
-            $place->selected_voivodeship = $request->selectedVoivodeship;
-            $place->selected_district = $request->selectedDistrict;
-            $place->selected_locality = $request->selectedLocality;
+            $place->name = $request->placeName;
+            $place->voivodeship = $request->selectedVoivodeship;
+            $place->district = $request->selectedDistrict;
+            $place->locality = $request->selectedLocality;
             $place->street_address = $request->streetAddress;
             $place->latitude = $request->latitude;
             $place->longitude = $request->longitude;

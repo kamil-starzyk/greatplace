@@ -79,6 +79,9 @@ nav{
   border-radius: 50%;
 }
 
+#main-wrapper{
+  margin:0 80px;
+}
 
 /* buttons and stuff */
 .btn-round{
