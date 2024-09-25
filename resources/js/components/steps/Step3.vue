@@ -169,16 +169,7 @@ export default {
   box-shadow: none;
   outline: none;
 }
-.tag{
-  height: 27px;
-  color:#5D5D5D;
-  background-color: #F1F3F4;
-  border-radius: 19px;
-  padding: 4px 8px;
-  font-size: 14px;
-  font-weight: 700;
-  margin-right: 8px;
-}
+
 .tag-close{
   cursor: pointer;
 }

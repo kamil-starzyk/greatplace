@@ -17,4 +17,5 @@ class Place extends Model
     public function images(){
         return $this->hasMany(Image::class);
     }
+    #TODO Co w sytuacji, w którem do miejsca jest dodane mniej niż 3 zdjęcia?
 }
