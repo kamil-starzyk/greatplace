@@ -18,7 +18,7 @@
     <nav>
       <ul class="main_links">
         <li class="nav_item"><a href="/"><img src="{{ asset('img/icons/polecane.png') }}" alt="ikona polecane"> Polecane</a></li>
-        <li class="nav_item"><a href="add"><img src="{{ asset('img/icons/dodaj.png') }}" alt="ikona dodaj"> Dodaj</a></li>
+        <li class="nav_item"><a href="/add"><img src="{{ asset('img/icons/dodaj.png') }}" alt="ikona dodaj"> Dodaj</a></li>
         <li class="nav_item"><a href=""><img src="{{ asset('img/icons/konto.png') }}" alt="ikona konto"> Konto</a></li>
       </ul>
     </nav>

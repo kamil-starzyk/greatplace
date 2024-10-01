@@ -15,9 +15,7 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ThreeStepForm from './components/ThreeStepForm.vue';
 import GalleryComponent from './components/GalleryComponent.vue';
-app.component('three-step-form', ThreeStepForm);
 app.component('gallery-component', GalleryComponent)
 
 /**
@@ -38,4 +36,4 @@ app.component('gallery-component', GalleryComponent)
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.mount('#gallery');

@@ -5,6 +5,12 @@
   text-decoration: none;
   font-family: "Mulish", sans-serif;
 }
+button{
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
 body{
   margin: 0;
 }

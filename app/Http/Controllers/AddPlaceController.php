@@ -28,7 +28,7 @@ class AddPlaceController extends Controller
             'easeOfAccess' => 'required|string|max:255',
             'description' => 'required|string',
             'tags.*' => 'string',
-            'bestSeasons.*' => 'string',
+            'bestSeasons.*' => 'json',
             'price' => 'required|numeric',
             'priceFor' => 'required|string|max:255'
         ];
@@ -58,7 +58,7 @@ class AddPlaceController extends Controller
             $place->longitude = $request->longitude;
             $place->ease_of_access = $request->easeOfAccess;
             $place->description = $request->description;
-            $place->best_seasons = json_encode($request->bestSeasons);
+            $place->best_seasons = $request->bestSeasons;
             $place->price = $request->price;
             $place->price_for = $request->priceFor;
             $place->save();
