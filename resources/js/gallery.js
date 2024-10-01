@@ -36,4 +36,4 @@ app.component('gallery-component', GalleryComponent)
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#gallery');
+app.mount('#place_photos');

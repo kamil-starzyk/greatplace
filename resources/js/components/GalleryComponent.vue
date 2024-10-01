@@ -1,6 +1,19 @@
 <template>
-  <div id="black_container">
-    <button id="close_gallery_button" onclick="closeGallery()">X</button>
+  <div id="photos">
+    <div id="big_image">
+      <img :src="photos[0]" class="photo" alt="">
+    </div>
+    <div id="small_images">
+    <img :src="photos[1]" class="photo" alt="">
+    <img :src="photos[2]" class="photo" alt="">
+    </div>
+
+    <button v-if="photos.length > 3" id="dark_circle" @click="showGallery">
+        + {{photos.length - 3}}
+    </button>
+  </div>
+  <div v-show="isGalleryVisible" id="gallery">
+    <button id="close_gallery_button" @click="hideGallery">X</button>
     <img :src="photos[0]" alt="">
   </div>
 </template>
@@ -13,16 +26,73 @@ export default {
   },
   data() {
     return {
-      
+      isGalleryVisible: false
     }
   },
   methods: {
+    showGallery() {
+        this.isGalleryVisible = true;
+    },
+    hideGallery() {
+        this.isGalleryVisible = false;
+    },
   }
 }
 </script>
 
 <style scoped>
-#black_container{
+
+#photos{
+  display: flex;
+  gap:24px;
+}
+#big_image{
+  width: 70%;
+  height: 442px;
+}
+#big_image img{
+  width: 100%;
+  height: 100%;
+}
+#small_images{
+  width: 30%;
+  height: 442px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+#small_images img{
+  width: 100%;
+  height: calc((100% - 24px) / 2);
+}
+.photo{
+  object-fit: cover;
+  border-radius: 16px;
+}
+#dark_circle{
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0, 38%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#dark_circle:hover{
+  background-color: rgba(0,0,0, 68%);
+}
+#gallery{
   position: fixed;
   top:0;
   left:0;
@@ -32,8 +102,11 @@ export default {
 }
 #close_gallery_button{
   position: fixed;
-  top:51px;
-  right:81px;
+  top:41px;
+  right:71px;
+  width: 34px;
+  height: 34px;
   color: white;
+  cursor: pointer;
 }
 </style>

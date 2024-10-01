@@ -8,18 +8,7 @@
 <div id="main-wrapper">
     
     <div id="place_photos">
-        <div id="big_image">
-            <img src="{{ Storage::url($place->images[0]->path) }}" class="photo" alt="">
-        </div>
-        <div id="small_images">
-        <img src="{{ Storage::url($place->images[1]->path) }}" class="photo" alt="">
-        <img src="{{ Storage::url($place->images[2]->path) }}" class="photo" alt="">
-        </div>
-        @if (count($place->images) > 3)
-            <button id="dark_circle" onclick="openGallery()">
-                + {{count($place->images) - 3}}
-            </button>
-        @endif
+        <gallery-component :photos='@json($place->images->map(fn($image) => Storage::url($image->path)))'></gallery-component>
     </div>
 
     <div id="place_details">
@@ -74,25 +63,8 @@
 
     </div>
         
-
-    <div id="gallery" style="display: none">
-        <gallery-component :photos='@json($place->images->map(fn($image) => Storage::url($image->path)))'></gallery-component>
-    </div>
     <script src="{{ mix('resources/js/gallery.js') }}" type="module"></script>
-    <script>
-        function openGallery() {
-            const galleryElement = document.getElementById('gallery');
-            if (galleryElement) {
-                galleryElement.style.display = 'block';
-            }
-        }
-        function closeGallery() {
-            const galleryElement = document.getElementById('gallery');
-            if (galleryElement) {
-                galleryElement.style.display = 'none';
-            }
-        }
-    </script>
+    
 
 </div>
 
