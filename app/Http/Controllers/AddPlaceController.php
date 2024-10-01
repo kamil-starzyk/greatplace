@@ -10,6 +10,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image as InterventionImage;
 
 class AddPlaceController extends Controller
 {
@@ -67,11 +68,22 @@ class AddPlaceController extends Controller
             Log::info($request->file('photos'));
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
-                    $path = $photo->store('public/photos');
+                    // resizing and changing to jpeg
+                    $img = InterventionImage::read($photo->getPathname());
+                    $img->scaleDown(width: 1920);
+                    $jpegImage = $img->toJpeg(90);
+                    $path = 'public/photos/' . uniqid() . '.jpg';
+                    Storage::put($path, $jpegImage);
+                    $thumbnail = InterventionImage::read($photo)
+                                ->resize(width: 181, height:129)
+                                ->toJpeg(90);
+                    $thumbnail_path = 'public/thumbnails/' . uniqid() . '.jpg';
+                    Storage::put($thumbnail_path, $thumbnail);
                     // Create a new Image record
                     $image = new Image();
                     $image->place_id = $place->id;
                     $image->path = $path;
+                    $image->thumbnail = $thumbnail_path;
                     $image->alt_text = '';
                     $image->title = ''; 
                     $image->save();

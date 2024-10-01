@@ -13,7 +13,7 @@
     </button>
   </div>
   <div v-show="isGalleryVisible" id="gallery">
-    <button id="close_gallery_button" @click="hideGallery">X</button>
+    <button id="close_gallery_button" @click="hideGallery"><img :src="'/img/icons/x_button_white.png'" alt=""></button>
     <img :src="photos[0]" alt="">
   </div>
 </template>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('place_id')->constrained()->onDelete('cascade'); 
             $table->string('path'); 
+            $table->string('thumbnail'); 
             $table->string('alt_text')->nullable(); 
             $table->string('title')->nullable(); 
             $table->timestamps();
