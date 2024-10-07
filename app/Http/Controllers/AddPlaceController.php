@@ -65,34 +65,37 @@ class AddPlaceController extends Controller
             $place->save();
 
             // Handle file uploads and save images to the database
-            Log::info($request->file('photos'));
+            //Log::info($request->file('photos'));
             if ($request->hasFile('photos')) {
+                $firstHorizontalImage = null;
+                $images = [];
                 foreach ($request->file('photos') as $photo) {
-                    // resizing and changing to jpeg
                     $img = InterventionImage::read($photo->getPathname());
-                    $img->scaleDown(width: 1920);
-                    $jpegImage = $img->toJpeg(90);
-                    $path = 'public/photos/' . uniqid() . '.jpg';
-                    Storage::put($path, $jpegImage);
-                    $thumbnail = InterventionImage::read($photo)
-                                ->resize(width: 181, height:129)
-                                ->toJpeg(90);
-                    $thumbnail_path = 'public/thumbnails/' . uniqid() . '.jpg';
-                    Storage::put($thumbnail_path, $thumbnail);
-                    // Create a new Image record
-                    $image = new Image();
-                    $image->place_id = $place->id;
-                    $image->path = $path;
-                    $image->thumbnail = $thumbnail_path;
-                    $image->alt_text = '';
-                    $image->title = ''; 
-                    $image->save();
+                    if (!$firstHorizontalImage && ($img->width() > $img->height())){
+                        Log::info("pierwsze kurwa");
+                        $firstHorizontalImage = $photo;
+                    }
+                    else{
+                        Log::info("cała kurwa reszta");
+                        $images[] = $photo;
+                    }
                 }
+                Log::info("BENC!");
+                Log::info($images);
+                if($firstHorizontalImage) {
+                    Log::info("pierwsze horyzontalne");
+                    saveImage($firstHorizontalImage, $place->id);
+                }
+                foreach ($images as $image){
+                    Log::info("pozostałe zdjęcia");
+                    saveImage($image, $place->id);
+                }
+
             }
 
             if ($request->has('tags')) {
                 $tagIds = [];
-                Log::info($request->tags);
+                //Log::info($request->tags);
                 foreach ($request->tags as $tagName) {
                     $tag = Tag::firstOrCreate(['name' => $tagName]);
                     $tagIds[] = $tag->id;
@@ -107,8 +110,42 @@ class AddPlaceController extends Controller
             // Log the error for debugging
             Log::error('Form submission error: ' . $e->getMessage());
 
+
             // Return an error response to the frontend
             return response()->json(['error' => 'There was an error submitting the form. Please try again later.'], 500);
         }
+    }
+}
+
+function saveImage($img, $place_id){
+    try {
+        $image = InterventionImage::read($img->getPathname());
+        if ($image->width() > $image->height()){
+            $image->scaleDown(width: 1920);
+        }
+        else{
+            $image->scaleDown(height: 1920);
+        }
+
+        $jpegImage = $image->toJpeg(90);
+        $image_path = 'public/photos/' . uniqid() . '.jpg';
+        Storage::put($image_path, $jpegImage);
+
+        $image->cover(181, 129);
+        $jpegThumbnail = $image->toJpeg(90);
+
+        $thumbnail_path = 'public/thumbnails/' . uniqid() . '.jpg';
+        Storage::put($thumbnail_path, $jpegThumbnail);
+        // Create a new Image record
+        $image = new Image();
+        $image->place_id = $place_id;
+        $image->photo = $image_path;
+        $image->thumbnail = $thumbnail_path;
+        $image->alt_text = '';
+        $image->title = ''; 
+        $image->save();
+    } catch (\Exception $e) {
+        Log::error('Error in saveImage function: ' . $e->getMessage(), ['exception' => $e]);
+        throw $e; // Rethrow to be caught by the outer try-catch
     }
 }

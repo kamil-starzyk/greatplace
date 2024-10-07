@@ -18,7 +18,7 @@
         @foreach ($places as $place)
         <div class="card-suggested">
             <div class="card-image">
-                <img src="{{ Storage::url($place->images[0]->path) }}" alt="Place Image">
+                <img src="{{ Storage::url($place->images[0]->photo) }}" alt="Place Image">
             </div>
             <div class="card-details">
             <h3>

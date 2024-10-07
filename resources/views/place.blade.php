@@ -10,7 +10,7 @@
     <div id="place_photos">
         <gallery-component 
             :images='@json($place->images->map(fn($image) => [
-                "photo" => Storage::url($image->path),
+                "photo" => Storage::url($image->photo),
                 "thumbnail" => Storage::url($image->thumbnail)
             ]))'
         ></gallery-component>
