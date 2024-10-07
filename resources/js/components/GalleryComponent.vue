@@ -1,28 +1,32 @@
 <template>
+
   <div id="photos">
     <div id="big_image">
-      <img :src="photos[0]" class="photo" alt="">
+      <img :src="images[0].photo" class="photo" alt="">
     </div>
     <div id="small_images">
-    <img :src="photos[1]" class="photo" alt="">
-    <img :src="photos[2]" class="photo" alt="">
+    <img :src="images[1].photo" class="photo" alt="">
+    <img :src="images[2].photo" class="photo" alt="">
     </div>
-
-    <button v-if="photos.length > 3" id="dark_circle" @click="showGallery">
-        + {{photos.length - 3}}
+    <button v-if="images.length > 3" id="dark_circle" @click="showGallery">
+        + {{images.length - 3}}
     </button>
   </div>
+
   <div v-show="isGalleryVisible" id="gallery">
     <button id="close_gallery_button" @click="hideGallery"><img :src="'/img/icons/x_button_white.png'" alt=""></button>
-    <img :src="photos[0]" alt="">
+    
+    <img :src="images[0].photo" alt="">
+    <img :src="images[0].thumbnail" alt="">
   </div>
+
 </template>
 
 <script>
 
 export default {
   props:{
-    photos: Array
+    images: Array
   },
   data() {
     return {

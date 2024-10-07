@@ -8,7 +8,12 @@
 <div id="main-wrapper">
     
     <div id="place_photos">
-        <gallery-component :photos='@json($place->images->map(fn($image) => Storage::url($image->path)))'></gallery-component>
+        <gallery-component 
+            :images='@json($place->images->map(fn($image) => [
+                "photo" => Storage::url($image->path),
+                "thumbnail" => Storage::url($image->thumbnail)
+            ]))'
+        ></gallery-component>
     </div>
 
     <div id="place_details">
