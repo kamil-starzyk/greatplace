@@ -16,20 +16,41 @@
   <div v-show="isGalleryVisible" id="gallery">
     <button id="close_gallery_button" @click="hideGallery"><img :src="'/img/icons/x_button_white.png'" alt=""></button>
     
-    <img :src="images[0].photo" alt="">
-    <img :src="images[0].thumbnail" alt="">
+    <div id="gallery_main">
+      <div class="gallery_element">
+        <img :src="images[selectedImageIndex].photo" id="main_gallery_photo" alt="">
+      </div>
+      <div class="gallery_element">
+        <div id="progress_dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot white_dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="gallery_element">
+        <ThumbnailSlider :images="images" @thumbnail-clicked="changeMainPhoto" />
+      </div>
+    </div>
   </div>
 
 </template>
 
 <script>
+import ThumbnailSlider from './ThumbnailSlider.vue';
+
 
 export default {
+  components: {
+    ThumbnailSlider
+  },
   props:{
     images: Array
   },
   data() {
     return {
+      selectedImageIndex: 0,
       isGalleryVisible: false
     }
   },
@@ -40,6 +61,9 @@ export default {
     hideGallery() {
         this.isGalleryVisible = false;
     },
+    changeMainPhoto(index) {
+      this.selectedImageIndex = index; 
+    }
   }
 }
 </script>
@@ -103,6 +127,8 @@ export default {
   width:100vw;
   min-height: 100vw;
   background-color: black;
+  display: flex;
+  justify-content: center;
 }
 #close_gallery_button{
   position: fixed;
@@ -113,4 +139,36 @@ export default {
   color: white;
   cursor: pointer;
 }
+
+#gallery_main{
+  width: calc(100vw - 370px);
+}
+.gallery_element{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#main_gallery_photo{
+  margin-top: 99px;
+  height: 602px;
+  max-width: 100%;
+}
+#progress_dots{
+  min-width: 72px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 16px;
+}
+#progress_dots .dot{
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+#progress_dots .dot.white_dot{
+  background-color: white;
+}
+
 </style>

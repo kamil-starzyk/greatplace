@@ -65,29 +65,22 @@ class AddPlaceController extends Controller
             $place->save();
 
             // Handle file uploads and save images to the database
-            //Log::info($request->file('photos'));
             if ($request->hasFile('photos')) {
                 $firstHorizontalImage = null;
                 $images = [];
                 foreach ($request->file('photos') as $photo) {
                     $img = InterventionImage::read($photo->getPathname());
                     if (!$firstHorizontalImage && ($img->width() > $img->height())){
-                        Log::info("pierwsze kurwa");
                         $firstHorizontalImage = $photo;
                     }
                     else{
-                        Log::info("cała kurwa reszta");
                         $images[] = $photo;
                     }
                 }
-                Log::info("BENC!");
-                Log::info($images);
                 if($firstHorizontalImage) {
-                    Log::info("pierwsze horyzontalne");
                     saveImage($firstHorizontalImage, $place->id);
                 }
                 foreach ($images as $image){
-                    Log::info("pozostałe zdjęcia");
                     saveImage($image, $place->id);
                 }
 
@@ -95,7 +88,7 @@ class AddPlaceController extends Controller
 
             if ($request->has('tags')) {
                 $tagIds = [];
-                //Log::info($request->tags);
+                
                 foreach ($request->tags as $tagName) {
                     $tag = Tag::firstOrCreate(['name' => $tagName]);
                     $tagIds[] = $tag->id;
