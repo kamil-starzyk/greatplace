@@ -1,12 +1,19 @@
 <template>
-  <div id="thumbnail_slider_wrapper">
+  <div 
+    id="thumbnail_slider_wrapper"
+    ref="slider"
+    @mousedown="startDrag"
+    @mouseup="stopDrag"
+    @mouseleave="stopDrag"
+    @mousemove="onDrag"
+  >
     <div ref="roller" id="thumbnail_slider_roller">
       <div class="thumbnail_slider_element" 
         v-for="(image, index) in images"
         :key="index"
         @click="selectImage(index)"
       >
-        <img :src="image.thumbnail" alt="">
+        <img :src="image.thumbnail" alt="" draggable="false">
       </div>
     </div>
   </div>
@@ -22,7 +29,10 @@ export default {
   },
   data() {
     return {
-      rollerWidth: 0
+      rollerWidth: 0,
+      isDragging: false,
+      startX: 0,
+      scrollLeft: 0
     };
   },
   mounted() {
@@ -49,6 +59,21 @@ export default {
     },
     selectImage(index){
       this.$emit('thumbnail-clicked', index);
+    },
+    startDrag(e) {
+      this.isDragging = true;
+      this.startX = e.pageX - this.$refs.slider.offsetLeft;
+      this.scrollLeft = this.$refs.slider.scrollLeft;
+    },
+    stopDrag() {
+      this.isDragging = false;
+    },
+    onDrag(e) {
+      if (!this.isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.slider.offsetLeft;
+      const walk = (x - this.startX) * 2; // Speed up the scroll
+      this.$refs.slider.scrollLeft = this.scrollLeft - walk;
     }
   }
 };
@@ -60,7 +85,11 @@ export default {
   width: 100%;
   height: 129px;
   overflow-x: scroll;
-  overflow-y: hidden
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+#thumbnail_slider_wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and other WebKit browsers */
 }
 .thumbnail_slider_element{
   display: inline-block;
@@ -69,6 +98,7 @@ export default {
   height: 129px;
   border-radius: 12px;
   overflow: hidden;
+  cursor: pointer;
 }
 .thumbnail_slider_element:last-child{
   margin-right: 0;
