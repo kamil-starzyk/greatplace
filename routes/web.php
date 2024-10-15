@@ -1,23 +1,27 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AddPlaceController;
-use App\Http\Controllers\PlaceController;
+use Inertia\Inertia;
 
-Route::get('/', [PlaceController::class, 'all']);
-
-Route::get('/place/{id}', [PlaceController::class, 'show'])->name('place.show');
-
-Route::get('/add', function () {
-    return view('add');
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Route::get('/add-form', function () {
-    return view('add-form');
-});
-Route::post('/submit-add-form', [AddPlaceController::class, 'submitForm']);
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-
-Route::get('/regulamin', function () {
-    return view('regulamin');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__.'/auth.php';
