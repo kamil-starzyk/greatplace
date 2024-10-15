@@ -32,7 +32,11 @@
         
       <div id="user">
         
+      @if(auth()->check())
         @include('partials.authenticated_user')
+      @else
+        @include('partials.guest_user')
+      @endif
 
       </div>
     </div>

@@ -5,6 +5,12 @@
   text-decoration: none;
   font-family: "Mulish", sans-serif;
 }
+a{
+  color:#222222;
+}
+a:hover{
+  text-decoration: underline;
+}
 button{
   background: none;
   border: none;
@@ -107,6 +113,9 @@ nav{
 .btn-black{
   background-color: #1A1A1A;
   color: #FFFFFF;
+}
+.btn-black a{
+  color:white
 }
 .btn-square{
   width: 48px;

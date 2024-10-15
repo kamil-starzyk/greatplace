@@ -1,1 +1,1 @@
-<p>GUEST</p>
+<div class="btn-round btn-black"><a href="">Zaloguj</a></div>
