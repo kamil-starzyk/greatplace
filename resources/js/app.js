@@ -16,9 +16,7 @@ import { createApp } from 'vue';
 const app = createApp({});
 
 import ThreeStepForm from './components/ThreeStepForm.vue';
-import GalleryComponent from './components/GalleryComponent.vue';
 app.component('three-step-form', ThreeStepForm);
-app.component('gallery-component', GalleryComponent)
 
 /**
  * The following block of code may be used to automatically register your
