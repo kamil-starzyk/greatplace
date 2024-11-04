@@ -9,14 +9,9 @@
   width: 70%;
 }
 #place_details h1{
-  font-size: 32px;
-  font-weight: 700;
   margin-bottom: 24px;
 }
 #place_details p{
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 27.2px;
   margin-bottom: 35px;
 }
 #tags{

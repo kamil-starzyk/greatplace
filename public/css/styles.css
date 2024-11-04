@@ -5,6 +5,15 @@
   text-decoration: none;
   font-family: "Mulish", sans-serif;
 }
+h1{
+  font-size: 32px;
+  font-weight: 700;
+}
+p{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27.2px;
+}
 a{
   color:#222222;
 }
@@ -109,6 +118,10 @@ nav{
   align-items: center;
   padding:0 16px;
   cursor: pointer;
+}
+.btn-big{
+  height: 48px;
+  border-radius: 24px;
 }
 .btn-black{
   background-color: #1A1A1A;
