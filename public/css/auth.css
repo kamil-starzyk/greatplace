@@ -1,0 +1,56 @@
+#main-box{
+  width: 1016px;
+  height: 642px;
+  margin: 97px auto;
+  border: 1px solid #EAEAEA;
+  border-radius: 24px;
+  display: flex;
+}
+#form-box{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h1{
+  margin-bottom: 21px;
+}
+p{
+  margin: 0 30px 40px 30px;
+  text-align: center;
+}
+#form-inner-box{
+  width: 358px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#form-inner-box form{
+  width: 100%;
+}
+.input-div{
+  margin-bottom: 16px;
+}
+.btn-big{
+  width: 100%;
+  margin-bottom: 24px;
+}
+#forgot-password{
+  display: block;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+
+
+#picture-box{
+  flex:1;
+  padding: 16px;
+}
+#picture-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
