@@ -7,7 +7,12 @@
 <div id="form-inner-box">
   <form method="POST" action="{{ route('password.email') }}">
     @csrf
-    <input type="text" class="basic-input" id="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+    <div id="email-input" class="input-div">
+      <input type="text" class="basic-input" id="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+      @if ($errors->has('email'))
+        <div class="error">{{ $errors->first('email') }}</div>
+      @endif
+    </div>
     
     <input type="submit" class="btn-round btn-black btn-big " value="Wyślij link">
     

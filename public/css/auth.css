@@ -29,11 +29,8 @@ p{
 #form-inner-box form{
   width: 100%;
 }
-#email{
+.input-div{
   margin-bottom: 16px;
-}
-#password{
-  margin-bottom: 24px;
 }
 .btn-big{
   width: 100%;
@@ -42,6 +39,7 @@ p{
 #forgot-password{
   display: block;
   width: 100%;
+  margin-bottom: 32px;
 }
 
 

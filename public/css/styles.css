@@ -157,3 +157,8 @@ nav{
   font-weight: 700;
   margin-right: 8px;
 }
+
+.error{
+  color: red;
+  font-size: 14px;
+}
