@@ -50,6 +50,7 @@ class AddPlaceController extends Controller
 
             // Save the Place data to the database
             $place = new Place();
+            $place->user_id = auth()->id();
             $place->name = $request->placeName;
             $place->voivodeship = $request->selectedVoivodeship;
             $place->district = $request->selectedDistrict;

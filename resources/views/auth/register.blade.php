@@ -24,16 +24,16 @@
     </div>
 
     <div id="password-input" class="input-div">
-      <input type="password" class="basic-input" id="password" name="password" required autocomplete="current-password">
+      <input type="password" class="basic-input" id="password" name="password" required autocomplete="new-password">
       @if ($errors->has('password'))
         <div class="error">{{ $errors->first('password') }}</div>
       @endif
     </div>
 
-    <div id="password-confirmation-input" class="input-div">
-      <input type="password" class="basic-input" id="password-confirmation" name="password-confirmation" required autocomplete="new-password">
-      @if ($errors->has('password-confirmation'))
-        <div class="error">{{ $errors->first('password-confirmation') }}</div>
+    <div id="password_confirmation-input" class="input-div">
+      <input type="password" class="basic-input" id="password_confirmation" name="password_confirmation" required autocomplete="new-password">
+      @if ($errors->has('password_confirmation'))
+        <div class="error">{{ $errors->first('password_confirmation') }}</div>
       @endif
     </div>
 

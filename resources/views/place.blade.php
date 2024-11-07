@@ -67,6 +67,10 @@
 
 
     </div>
+
+    <div id="user_contact">
+        {{$place->user->name}}
+    </div>
         
     <script src="{{ mix('resources/js/gallery.js') }}" type="module"></script>
     
