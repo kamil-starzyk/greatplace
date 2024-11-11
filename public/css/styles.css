@@ -55,6 +55,10 @@ nav{
   color:#B6B6B6;
   font-weight:700;
 }
+.nav_item>a.active{
+  color: #1A1A1A;
+
+}
 .nav_item img{
   vertical-align: middle;
 }

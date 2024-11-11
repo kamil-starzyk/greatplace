@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-form', function () {
         return view('add-form');
     });
+
+    Route::get('personal-data', function () {
+        return view('profile.personal-data');
+    });
+
     Route::post('/submit-add-form', [AddPlaceController::class, 'submitForm']);
 });
 

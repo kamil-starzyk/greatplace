@@ -1,0 +1,12 @@
+#main-box{
+  width: calc(100vw - 162px);
+  margin: 76px auto;
+  display: flex;
+}
+#profile-nav{
+  width: 356px;
+}
+#profile-places-switch{
+  width:310px;
+  margin-bottom: 54px;
+}

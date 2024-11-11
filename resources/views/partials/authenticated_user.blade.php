@@ -1,7 +1,7 @@
 <div id="user_profile_photo">
   <img src="{{ asset('img/profile_photo.jpg') }}" alt="" onclick="toggleMenu()">
   <div id="profile_menu" style="display:none">
-    <a href="#">Profil</a>
+    <a href="/personal-data">Profil</a>
     <form method="POST" action="{{ route('logout') }}">
     @csrf
       <input type="submit" value="Wyloguj">
