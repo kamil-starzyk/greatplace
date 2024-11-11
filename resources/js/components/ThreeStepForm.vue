@@ -3,8 +3,15 @@
     <step1 v-if="step === 1" :formData="formData" :nextStep="nextStep"/>
     <step2 v-if="step === 2" :formData="formData" :previousStep="previousStep" :nextStep="nextStep"/>
     <step3 v-if="step === 3" :formData="formData" :previousStep="previousStep" :submitForm="submitForm"/>
-    <div v-if="step === 4">
-      <h1>Form Submitted Successfully!</h1>
+    <div v-if="step === 4" id="main-box">
+      <img src="/img/add_page_picture_success.png" alt="Ilustracja osoby stojącej obok dużego ekranu smartfona, na którym wyświetlane są miniatury obrazów" class="obraz-ludzi">
+      <h2 class="dodaj-miejsce">Dziękujemy za dodanie nowego miejsca</h2>
+      <p class="przeslij-lokalizacje">Twoje miejsce zostało dodane i będzie wyświetlane razem z innymi</p>
+      <div class="flex-centered" style="gap:25px">
+        <a href="add-form" class="btn-round btn-black btn-big"><span>Dodaj kolejne</span></a>
+        <a href="/" class="btn-round btn-big"><span>Zobacz dodane</span></a>
+
+      </div>
     </div>
   </div>
 </template>

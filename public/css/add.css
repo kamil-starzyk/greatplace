@@ -9,7 +9,7 @@
   width: calc(100vw - 366px)
 }
 #main-box{
-  max-width: 607px;
+  min-width: 607px;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -20,6 +20,7 @@ img.obraz-ludzi{
 h2.dodaj-miejsce{
   font-size: 34px;
   margin-bottom: 16px;
+  text-align: center;
 }
 p.przeslij-lokalizacje{
   text-align: center;

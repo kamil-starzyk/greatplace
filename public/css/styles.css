@@ -58,6 +58,11 @@ nav{
 .nav_item img{
   vertical-align: middle;
 }
+.flex-centered{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 #search_user_group{
