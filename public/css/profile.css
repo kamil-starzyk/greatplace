@@ -10,3 +10,17 @@
   width:310px;
   margin-bottom: 54px;
 }
+
+#other-links ul{
+  list-style: none;
+}
+#other-links ul li{
+  margin-bottom: 21px;
+}
+
+#nav-arrow.rotated{
+  transform: rotate(180deg);
+}
+.collapsible-content{
+  padding-left: 8px;
+}

@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @endpush
 
+@php
+
+@endphp
+
 @section('content')
 
 <div id="main-box">
@@ -18,11 +22,40 @@
         </li>
       </ul>
     </div>
+    <div id="other-links">
+      <ul>
+        <li class="collapsible" onclick="toggleCollapsible(this)">
+          <span>Twój profil</span>
+          <img src="{{ asset('img/icons/simple_arrow.png') }}" id="nav-arrow" alt="ikona dodaj"> <!-- Collapsible icon -->
+        </li>
+        <div class="collapsible-content" style="display: block;">
+          <li class="nav_item active"><a href="#">Dane osobowe</a></li>
+          <li class="nav_item"><a href="#">Logowanie i bezpieczeństwo</a></li>
+          <li class="nav_item"><a href="#">Powiadomienia</a></li>
+          <li class="nav_item"><a href="#">Ulubione miejsca</a></li>
+          <li class="nav_item"><a href="#">Punkty</a></li>
+        </div>
+        <li class="nav_item"><a href="#">Polityka prywatności</a></li>
+        <li class="nav_item"><a href="#">Regulamin</a></li>
+        <li class="nav_item"><a href="#">Ustawienia</a></li>
+        <li class="nav_item"><a href="#">Pomoc</a></li>
+        <li class="nav_item"><a href="#">O Greatplace</a></li>
+      </ul>
+    </div>
   </div>
   <div id="profile-content">
     @yield('profile-content')
   </div>
   
 </div>
+
+<script>
+  function toggleCollapsible(element) {
+    const content = element.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+    var arrow = document.getElementById('nav-arrow');
+    arrow.classList.toggle("rotated");
+  }
+</script>
 
 @endsection
