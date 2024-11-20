@@ -16,6 +16,21 @@
 }
 #other-links ul li{
   margin-bottom: 21px;
+  font-weight: 600;
+}
+#other-links ul li a{
+  color: #1A1A1A;
+}
+#other-links ul li.grey a{
+  color: #B6B6B6;
+}
+li#collapsible{
+  position: relative;
+  margin-bottom: 15px !important;
+}
+#collapsible img{
+  position: absolute;
+  right:0
 }
 
 #nav-arrow.rotated{
@@ -23,4 +38,8 @@
 }
 .collapsible-content{
   padding-left: 8px;
+}
+
+.collapsible-content li:last-child{
+  margin-bottom: 27px !important;
 }
