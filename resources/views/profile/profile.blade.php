@@ -58,4 +58,6 @@
   }
 </script>
 
+<script src="{{ mix('resources/js/profile-photo.js') }}" type="module"></script>
+
 @endsection

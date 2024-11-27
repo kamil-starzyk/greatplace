@@ -43,3 +43,8 @@ li#collapsible{
 .collapsible-content li:last-child{
   margin-bottom: 27px !important;
 }
+
+/* profile-content */
+#profile-content{
+  padding-left: 156px;
+}

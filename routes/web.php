@@ -20,7 +20,7 @@ Route::get('/regulamin', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/personal-data', [ProfileController::class, 'edit'])->name('personal-data');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
@@ -31,9 +31,9 @@ Route::middleware('auth')->group(function () {
         return view('add-form');
     });
 
-    Route::get('personal-data', function () {
-        return view('profile.personal-data');
-    });
+    // Route::get('personal-data', function () {
+    //     return view('profile.personal-data');
+    // });
 
     Route::post('/submit-add-form', [AddPlaceController::class, 'submitForm']);
 });
