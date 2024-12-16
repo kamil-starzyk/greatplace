@@ -102,12 +102,40 @@ nav{
   width: 42px;
   height: 42px;
   border-radius: 50%;
+  position: relative;
 }
 #user_profile_photo img{
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
+#profile_menu{
+  width: 211px;
+  border-radius: 16px;
+  box-shadow: 0px 3px 12.7px 0px rgba(0, 0, 0, 0.15);
+  background-color: #FFFFFF;
+  position: absolute;
+  right: -10px;
+  padding: 16px;
+  margin-top: 15px;
+}
+#profile_menu_items{
+  list-style: none;
+}
+.profile_menu_item{
+  font-size: 16px;
+  color: #A1A1A1;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.profile_menu_item a{
+  color:#A1A1A1
+}
+#profile_menu_items hr{
+  color:#EAEAEA;
+  margin-bottom: 16px;
+}
+
 
 #main-wrapper{
   margin:0 80px;
