@@ -164,6 +164,10 @@ nav{
   background-color: #1A1A1A;
   color: #FFFFFF;
 }
+.btn-big{
+  width: 181px;
+  height: 48px;
+}
 .btn-black a{
   color:white
 }

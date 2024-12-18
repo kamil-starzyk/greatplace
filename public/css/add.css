@@ -215,13 +215,9 @@ li.file-preview img {
 .right-button{
   position: absolute;
   right:0;
-  width:181px;
-  height: 48px;
 }
 .left-button{
   position: absolute;
   left:0;
-  width:181px;
-  height: 48px;
   background-color: #F1F3F4;
 }

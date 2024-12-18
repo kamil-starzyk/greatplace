@@ -46,5 +46,34 @@ li#collapsible{
 
 /* profile-content */
 #profile-content{
-  padding-left: 156px;
+  margin-left: 156px;
+  position: relative;
+}
+h1{
+  margin-bottom: 34px;
+}
+
+#profile-photo{
+  margin-bottom: 29px;
+}
+.profile_input{
+  margin-bottom: 24px;
+}
+.profile_input label{
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 16px;;
+}
+.profile_input input{
+  width: 458px;
+}
+
+#left_button{
+  position: absolute;
+  left:0
+}
+#right_button{
+  position: absolute;
+  right: 0;
 }

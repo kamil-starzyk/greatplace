@@ -25,6 +25,12 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'telephone' => [
+                'nullable', // pozwala na puste pole
+                'string',   // powinno być ciągiem znaków
+                'max:15',   // maksymalna długość telefonu
+                'regex:/^\+?[0-9]{1,4}?[-.\s]?[0-9]{1,15}$/', // walidacja formatu telefonu
+            ],
         ];
     }
 }
