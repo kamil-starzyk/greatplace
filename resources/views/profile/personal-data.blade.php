@@ -5,11 +5,11 @@
 
 <h1>Edycja danych</h1>
 
-<form method="post" action="{{ route('profile.update') }}">
+<form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
 @csrf
 @method('patch')
   <div id="profile-photo">
-    <profile-photo :initial-picture="'{{ $user->profile_picture }}'">
+  <profile-photo :initial-picture="'{{ $user->profile_picture ? Storage::url($user->profile_picture) : '' }}'">
     </profile-photo>
   </div>
   <div class="profile_input">

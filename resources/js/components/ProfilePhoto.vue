@@ -4,16 +4,25 @@
       <img :src="preview || '/img/default-image.jpg'" alt="Zdjęcie profilowe" class="profile-picture">
       <span class="change-photo-text">Zmień zdjęcie</span>
     </label>
-    <input type="file" id="profile-picture-input" accept="image/*" @change="onFileChange" style="display: none;">
+    <input type="file" id="profile-picture-input" name="profile_picture" accept="image/*" @change="onFileChange" style="display: none;">
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    initialPicture: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
         preview: this.initialPicture || null // Podgląd zdjęcia
     }
+  },
+  mounted() {
+    this.preview = this.initialPicture; // Set preview after the component mounts
   },
   methods: {
     onFileChange(event) {

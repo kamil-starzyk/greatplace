@@ -31,6 +31,12 @@ class ProfileUpdateRequest extends FormRequest
                 'max:15',   // maksymalna długość telefonu
                 'regex:/^\+?[0-9]{1,4}?[-.\s]?[0-9]{1,15}$/', // walidacja formatu telefonu
             ],
+            'profile_picture' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:2048'
+            ]
         ];
     }
 }
