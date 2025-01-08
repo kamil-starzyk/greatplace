@@ -1,38 +1,39 @@
 <template>
   <div v-if="show" class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
-      <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+      <h2>
         {{ modalTitle }}
       </h2>
 
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+      <p>
         {{ modalDescription }}
       </p>
+      <form @submit.prevent="submitForm">
 
-      <div class="mt-6">
-        <label for="password" class="sr-only">
-          {{ passwordLabel }}
-        </label>
-        <input
+        <div class="mt-6">
+          <label for="password" class="sr-only">
+            {{ passwordLabel }}
+          </label>
+          <input
           id="password"
           v-model="password"
           type="password"
-          class="mt-1 block w-3/4"
           :placeholder="passwordPlaceholder"
-        />
-        <p v-if="error" class="mt-2 text-red-500 text-sm">
-          {{ error }}
-        </p>
-      </div>
-
-      <div class="mt-6 flex justify-end">
-        <button type="button" class="secondary-button" @click="closeModal">
-          {{ cancelButtonText }}
-        </button>
-        <button type="submit" class="danger-button ms-3">
-          {{ deleteButtonText }}
-        </button>
-      </div>
+          />
+          <p v-if="error">
+            {{ error }}
+          </p>
+        </div>
+        
+        <div>
+          <button type="button" class="secondary-button" @click="closeModal">
+            {{ cancelButtonText }}
+          </button>
+          <button type="submit" class="danger-button ms-3">
+            {{ deleteButtonText }}
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>

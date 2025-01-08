@@ -30,11 +30,21 @@ export default {
     closeModal() {
       this.showModal = false; // Closes the modal
     },
-    handleDelete(payload) {
-      console.log('Deleting account with password:', payload.password);
-      // Submit the form data to your backend
-      this.closeModal(); // Close modal after submitting
-    },
+    async handleDelete(payload) {
+      try {
+        const response = await axios.delete('/profile', {
+          data: { password: payload.password },
+        });
+        console.log('Delete successful:', response.data);
+        window.location.href = '/';
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert(
+          error.response?.data?.message ||
+            'There was an error submitting the form. Please try again later.'
+        );
+      }
+    }
   },
 };
 </script>

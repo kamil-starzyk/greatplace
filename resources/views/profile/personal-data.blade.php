@@ -55,13 +55,9 @@
 </form>
 
 <h2>Usuń konto</h2>
-<form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-@csrf
-@method('delete')
-  <div id="delete-user">
-    <delete-user></delete-user>
-  </div>
-</form>
+<div id="delete-user">
+  <delete-user></delete-user>
+</div>
 
 
 

@@ -10,7 +10,7 @@
     @csrf
     <div id="email-input" class="input-div">
     <div class="input-label">
-        Login
+        Email
       </div>
       <input type="text" class="basic-input" id="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
       @if ($errors->has('email'))
