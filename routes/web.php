@@ -6,7 +6,7 @@ use App\Http\Controllers\AddPlaceController;
 use App\Http\Controllers\PlaceController;
 
 
-Route::get('/', [PlaceController::class, 'all']);
+Route::get('/', [PlaceController::class, 'all'])->name('home');
 
 Route::get('/place/{id}', [PlaceController::class, 'show'])->name('place.show');
 
