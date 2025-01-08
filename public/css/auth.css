@@ -32,6 +32,10 @@ p{
 .input-div{
   margin-bottom: 16px;
 }
+.input-label{
+  font-weight: 700;
+  margin-bottom: 12px;
+}
 .btn-big{
   width: 100%;
   margin-bottom: 24px;
