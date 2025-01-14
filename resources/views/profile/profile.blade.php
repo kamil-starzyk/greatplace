@@ -59,6 +59,5 @@
 </script>
 
 <script src="{{ mix('resources/js/profile-photo.js') }}" type="module"></script>
-<script src="{{ mix('resources/js/delete-user.js') }}" type="module"></script>
 
 @endsection
