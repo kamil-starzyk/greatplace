@@ -9,7 +9,7 @@
         <a href="#" class="">Polubione</a>
       </li>
       <li class="profile_menu_item">
-        <a href="/personal-data" class="">Profil</a>
+        <a href="/profile-overview" class="">Profil</a>
       </li>
       <li class="profile_menu_item">
         <a href="#" class="">Jak dodawać lokacje</a>

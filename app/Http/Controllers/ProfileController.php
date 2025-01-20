@@ -14,6 +14,14 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function overview(Request $request): View
+    {
+        return view('profile.profile-overview', [
+            'user' => $request->user(),
+        ]);
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.personal-data', [

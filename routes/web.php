@@ -20,6 +20,7 @@ Route::get('/regulamin', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile-overview', [ProfileController::class, 'overview'])->name('profile-overview');
     Route::get('/personal-data', [ProfileController::class, 'edit'])->name('personal-data');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
