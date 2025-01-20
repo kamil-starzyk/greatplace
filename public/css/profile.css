@@ -58,6 +58,15 @@ form{
 #profile-photo{
   margin-bottom: 29px;
 }
+
+.profile-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
 .profile_input{
   margin-bottom: 24px;
 }
