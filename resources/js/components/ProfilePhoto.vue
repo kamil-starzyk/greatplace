@@ -54,13 +54,7 @@ export default {
     cursor: pointer;
 }
 
-.profile-picture {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ccc;
-}
+
 
 .change-photo-text {
     font-size: 14px;

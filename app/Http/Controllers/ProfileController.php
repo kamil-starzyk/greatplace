@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -17,8 +18,16 @@ class ProfileController extends Controller
 
     public function overview(Request $request): View
     {
+        $user = $request->user();
+        $profile_picture = '/img/default-image.jpg';
+        if ($user->profile_picture)
+        {
+        $profile_picture = Storage::url($user->profile_picture);
+        }
+
         return view('profile.profile-overview', [
-            'user' => $request->user(),
+            'profile_picture' => $profile_picture,
+            'user' => $user
         ]);
     }
 
