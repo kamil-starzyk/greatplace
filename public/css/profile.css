@@ -46,12 +46,15 @@ li#collapsible{
 
 /* profile-content */
 #profile-content{
+  width: 100%;
   margin-left: 156px;
   position: relative;
 }
 h1, h2{
   margin-bottom: 34px;
 }
+
+/* personal-data */
 form{
   padding-bottom: 100px;
 }
@@ -87,4 +90,35 @@ form{
 .right_button{
   position: absolute;
   right: 0;
+}
+
+/* profile-overview */
+#profile-data{
+  width: 100%;
+  display: flex;
+}
+#name-and-role{
+  margin-left: 33px;
+}
+#profile-name{
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.profile-info-entry{
+  font-size: 14px;
+  font-weight: 600;
+  color: #9A98A1;
+  margin-bottom: 4px;
+}
+
+#edit-data{
+  display: flex;
+  width: 160px;
+  margin-left: auto;
+  gap: 10px;
+}
+.edit-image{
+  width: 20px;
+  height: 20px;
 }

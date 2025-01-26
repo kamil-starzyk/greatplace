@@ -29,7 +29,7 @@
           <img src="{{ asset('img/icons/simple_arrow.png') }}" id="nav-arrow" alt="ikona dodaj"> <!-- Collapsible icon -->
         </li>
         <div class="collapsible-content" style="display: block;">
-          <li><a href="#">Dane osobowe</a></li>
+          <li><a href="profile-overview">Dane osobowe</a></li>
           <li class="grey"><a href="#">Logowanie i bezpieczeństwo</a></li>
           <li class="grey"><a href="#">Powiadomienia</a></li>
           <li class="grey"><a href="#">Ulubione miejsca</a></li>
