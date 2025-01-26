@@ -1,5 +1,5 @@
 <div id="user_profile_photo">
-  <img src="{{$profile_picture}}" alt="" onclick="toggleMenu()">
+  <img src="{{ Storage::url(auth()->user()->profile_picture) }}" alt="" onclick="toggleMenu()">
   <div id="profile_menu" style="display:none">
     <ul id="profile_menu_items">
       <li class="profile_menu_item">
