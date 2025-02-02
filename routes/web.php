@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/personal-data', [ProfileController::class, 'edit'])->name('personal-data');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/my-places', [ProfileController::class, 'myPlaces'])->name('my-places');
 
     Route::get('/add', function () {
         return view('add');

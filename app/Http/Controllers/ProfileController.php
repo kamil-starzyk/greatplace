@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
+use App\Models\Place;
+
 class ProfileController extends Controller
 {
     /**
@@ -79,5 +81,17 @@ class ProfileController extends Controller
         // $request->session()->regenerateToken();
 
         return redirect(route('home'));
+    }
+
+    public function myPlaces()
+    {
+        $user = Auth::user();
+        $places = Place::where('user_id', $user->id)->get();
+
+        if ($places->isEmpty()) {
+            return view('profile.empty-places');
+        }
+
+        return view('profile.my-places', compact('places'));
     }
 }
