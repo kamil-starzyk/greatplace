@@ -27,7 +27,7 @@
                 </a>
             </h3>
                 <p class="place-localisation">    
-                    <img src="{{ asset('img/icons/map_pin.png') }}" class="map_pin_icon" alt=""> <span>{{$place->locality}}</span>
+                    <img src="{{ asset('img/icons/map_pin.png') }}" alt=""> <span>{{$place->locality}}</span>
                 </p>
             </div>
         </div>
