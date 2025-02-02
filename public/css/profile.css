@@ -151,3 +151,25 @@ form{
   font-weight: 700;
   margin-left: auto;
 }
+
+/* My Places */
+#no-places-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 84px;
+}
+
+#no-places-container img{
+  margin-bottom: 26px;
+}
+
+#no-places-container > span{
+  display: block;
+  font-weight: 400;
+  font-size: 20px;
+  color: #B6B6B6;
+  margin-bottom: 23px;
+} 
