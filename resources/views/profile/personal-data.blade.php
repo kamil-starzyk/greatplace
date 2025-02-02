@@ -57,7 +57,7 @@
 <h2>Usuń konto</h2>
 <div id="delete-user">
   <!--<delete-user></delete-user>-->
-  <form method="post" action="{{ route('profile.destroy') }}" id="delete-user-form" class="p-6" onSubmit="confirm('Na pewno chcesz usunąć konto?');">
+  <form method="post" action="{{ route('profile.destroy') }}" id="delete-user-form" class="p-6" onSubmit="return confirm('Na pewno chcesz usunąć konto?');">
   @csrf
   @method('delete')
     <h2>Czy na pewno chcesz usunąć konto?</h2>

@@ -20,7 +20,7 @@
   </div>
   <div class="buttons">
     <div class="delete-place">
-      <form method="post" action="{{ route('place.destroy', $place->id) }}" onSubmit="confirm('Na pewno chcesz usunąć to miejsce? To działanie jest nieodwracalne');">        
+      <form method="post" action="{{ route('place.destroy', $place->id) }}" onSubmit="return confirm('Na pewno chcesz usunąć to miejsce? To działanie jest nieodwracalne');">        
       @csrf
       @method('delete')
         <button type="submit" >
