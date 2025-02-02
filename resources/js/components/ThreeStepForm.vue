@@ -9,7 +9,7 @@
       <p class="przeslij-lokalizacje">Twoje miejsce zostało dodane i będzie wyświetlane razem z innymi</p>
       <div class="flex-centered" style="gap:25px">
         <a href="add-form" class="btn-round btn-black btn-big"><span>Dodaj kolejne</span></a>
-        <a href="/" class="btn-round btn-big"><span>Zobacz dodane</span></a>
+        <a href="/my-places" class="btn-round btn-big"><span>Zobacz dodane</span></a>
 
       </div>
     </div>
