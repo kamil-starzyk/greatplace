@@ -17,4 +17,15 @@ class PlaceController extends Controller
         $place = Place::findOrFail($id);
         return view('place', ["place" => $place]);
     }
+
+    public function destroy($id)
+    {
+
+        $place = Place::findOrFail($id);
+        $place_name = $place->name;
+
+        $place->delete();
+
+        return redirect()->back()->with('success', 'Udało Ci się usunąć miejsce:'.$place_name.'!');   
+    }
 }

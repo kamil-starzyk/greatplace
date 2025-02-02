@@ -173,3 +173,45 @@ form{
   color: #B6B6B6;
   margin-bottom: 23px;
 } 
+
+#places-container{
+  width: 100%;
+}
+
+.place-entry{
+  height: 64px;
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+}
+.place-details{
+  height: 64px;
+  padding-top: 7px;
+  margin-left: 38px;
+}
+
+.place-entry > img{
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+}
+.place-name{
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.place-name:hover{
+  text-decoration: none;
+}
+.place-localisation{
+  color: #9A98A1;
+  font-size: 14px;
+}
+
+.delete-place button{
+  cursor: pointer;
+}
+.buttons {
+  margin-left: auto;
+}
