@@ -29,7 +29,7 @@
       </form>
     </div>
   </div>
-  <a href="edit-place" class="edit-place"><img src="{{ asset('img/icons/edit.png') }}" alt="Edytuj"></a>
+  <a href="{{ route('place.edit', ['id' => $place->id]) }}" class="edit-place"><img src="{{ asset('img/icons/edit.png') }}" alt="Edytuj"></a>
 </div>
 
 

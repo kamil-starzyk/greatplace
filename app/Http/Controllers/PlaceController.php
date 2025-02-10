@@ -28,4 +28,9 @@ class PlaceController extends Controller
 
         return redirect()->back()->with('success', 'Udało Ci się usunąć miejsce:'.$place_name.'!');   
     }
+
+    public function edit($id){
+        $place = $place = Place::with(['tags', 'images'])->findOrFail($id);
+        return view('edit-form', ["place" => $place]);
+    }
 }
